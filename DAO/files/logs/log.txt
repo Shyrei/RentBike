@@ -1,0 +1,4 @@
+{13-07-2017 13:44:32} {main} {FATAL} {shyrei.rentbike.util.ConnectionPool} {line 79} {Unexpected internal error} 
+{13-07-2017 13:45:11} {main} {FATAL} {shyrei.rentbike.util.ConnectionPool} {line 79} {Unexpected internal error} 
+{13-07-2017 14:11:30} {main} {FATAL} {shyrei.rentbike.util.ConnectionPool} {line 86} {Не возможно подключиться к БД} 
+{13-07-2017 14:13:16} {main} {FATAL} {shyrei.rentbike.util.ConnectionPool} {line 86} {Не возможно подключиться к БД} 
