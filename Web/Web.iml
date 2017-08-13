@@ -29,7 +29,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Service" />
     <orderEntry type="module" module-name="DAO" />
-    <orderEntry type="library" name="Maven: by.shyrei.rentbike:Entity:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="Entity" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jsp-api:7.0.47" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-el-api:7.0.47" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-servlet-api:7.0.47" level="project" />
