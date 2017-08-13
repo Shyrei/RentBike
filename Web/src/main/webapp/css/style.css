@@ -1,71 +1,125 @@
-@CHARSET "UTF-8";
-/*
-body, html {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-}
-*/
 
-
-body{
-    background: #c4c7cb;
-    background-image: -webkit-radial-gradient(cover, #FFF, #D1D1D1);
-    background-image: -moz-radial-gradient(cover, #e8eaec, #a4a8ae);
-    background-image: -o-radial-gradient(cover, #e8eaec, #a4a8ae);
-    background-image: radial-gradient(cover, #e8eaec, #a4a8ae)
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 20px;
 }
 
-html{
-    min-height:100%;
+.grid-item1{
+    grid-area: 1/1/1/2;
 }
 
-.Navigation{
-    height: 50px;
-    padding: 0;
-    margin: 0;
-    position: absolute;
+.grid-item2{
+    grid-area: 1/2/1/3;
 }
 
-.Navigation li 	{
-    height: auto;
-    width: 150px;
-    float: left;
+.grid-item3{
+    grid-area: 1/3/1/4;
+}
+
+table.MyTable {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border: 2px solid #6E7FA4;
+    background-color: #EEEEEE;
+    width: 100%;
+    height: 200%;
     text-align: center;
-    list-style: none;
-    font:12px "Bonveno", "Century Gothic";
-    padding: 0;
-    margin: 0;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    box-shadow: 0 1px 0 rgba(255,255,255, .9) inset, 0 1px 3px rgba(0,0,0, .1);
-    border-radius: 3px;
-    margin-left:10px;
+    border-collapse: collapse;
+    -webkit-box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+    -moz-box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+    box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+}
+table.MyTable td, table.MyTable th {
+    border: 1px solid #AAAAAA;
+    padding: 10px 5px;
+}
+table.MyTable tbody td {
+    font-size: 15px;
+}
+table.MyTable tr:nth-child(even) {
+    background: #ADB9C9;
+}
+table.MyTable thead {
+    background: #6E7FA4;
+    background: -moz-linear-gradient(top, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    background: -webkit-linear-gradient(top, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    background: linear-gradient(to bottom, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    border-bottom: 2px solid #444444;
+}
+table.MyTable thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #D0E4F5;
+}
+table.MyTable thead th:first-child {
+    border-left: none;
 }
 
-.Navigation a{
-    padding:13px;
-    text-decoration: none;
-    color:#333;
-    text-shadow: 0 1px #fff;
-    display: block;
+table.MyTable tfoot td {
+    font-size: 14px;
 }
-.Navigation li ul{
-    display: none;
-    height: auto;
-    margin-left: -11px;
-    padding: 0;
+table.MyTable tfoot .links {
+    text-align: right;
 }
-
-.Navigation li:hover ul{
-    display: block;
+table.MyTable tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
 }
 
-.navbar li ul li {
-    background-color:#eee;
-    border: 1px solid #ccc;
+
+
+
+table.MyTableMain {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border: 2px solid #6E7FA4;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    -webkit-box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+    -moz-box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+    box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+}
+table.MyTableMain td, table.MyTableMain th {
+    border: 1px solid #AAAAAA;
+    /*padding: 0px 0px;*/
+}
+table.MyTableMain tbody td {
+    font-size: 15px;
+}
+table.MyTableMain thead {
+    background: #6E7FA4;
+    background: -moz-linear-gradient(top, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    background: -webkit-linear-gradient(top, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    background: linear-gradient(to bottom, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    border-bottom: 2px solid #444444;
+}
+table.MyTableMain thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #D0E4F5;
+}
+table.MyTableMain thead th:first-child {
+    border-left: none;
 }
 
-.Navigation li:hover, a:hover {
-    background: #e8e8e8;
+table.MyTableMain tfoot td {
+    font-size: 14px;
+}
+table.MyTableMain tfoot .links {
+    text-align: right;
+}
+table.MyTableMain tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
 }

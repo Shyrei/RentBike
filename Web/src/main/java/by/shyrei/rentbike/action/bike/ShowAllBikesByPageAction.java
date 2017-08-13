@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class ShowAllBikesByPageAction implements Action {
 
-    private final static int PAGE_CAPACITY = 7;
+    private final static int PAGE_CAPACITY = 8;
     private final static String PAGE = "page";
     private final static String LEFT_PAGE = "leftPage";
     private final static String RIGHT_PAGE = "rightPage";

@@ -2,13 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<nav class="navbar navbar-default navbar-static-top" style="background: #dae5ff">
+<nav class="navbar navbar-default navbar-static-top" style="background: #ADB9C9">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
 
             <%--пользователь--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.user"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.user"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/controller?action=show_all_users"><fmt:message key="nav.user.show.all"/></a></li>
@@ -39,7 +39,7 @@
 
             <%--роль--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.role"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.role"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="../includeAdmin/role_add.jsp"><fmt:message key="nav.role.add"/></a></li>
@@ -49,7 +49,7 @@
 
             <%--заказ--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.order"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.order"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/controller?action=show_all_orders"><fmt:message key="nav.order.show.all"/></a>
@@ -81,7 +81,7 @@
 
             <%--тип--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.type"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.type"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="../includeAdmin/type_add.jsp"><fmt:message key="nav.type.add"/></a></li>
@@ -94,7 +94,7 @@
 
             <%--станция--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.station"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.station"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/controller?action=show_all_stations"><fmt:message key="nav.station.show.all"/></a>
@@ -104,7 +104,7 @@
 
             <%--велосипед--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.bike"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.bike"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/controller?action=get_bike_data"><fmt:message key="nav.bike.add"/></a>
@@ -119,11 +119,11 @@
             <form action="/controller" class="navbar-form navbar-right">
                 <fmt:message key="nav.welcome"/><ctg:info user="${user}"/>
                 <input type="hidden" name="action" value="logout">
-                <button type="submit" class="btn btn-default"><fmt:message key="nav.signout"/></button>
+                <button type="submit" class="btn btn-default" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.signout"/></button>
             </form>
             <form action="/controller" method="post" class="navbar-form navbar-right">
                 <input type="hidden" name="action" value="show_admin_page">
-                <button type="submit" class="btn btn-default"><fmt:message key="nav.admin"/></button>
+                <button type="submit" class="btn btn-default" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.admin"/></button>
             </form>
         </c:if>
     </div>
