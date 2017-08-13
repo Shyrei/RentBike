@@ -42,7 +42,7 @@
                         <form action="/controller" method="post">
                             <input type="hidden" name="action" value="rent_bike">
                             <input type="hidden" name="bikeId" value="${bikesList[сounter.count-1].id}">
-                            <button type="submit" class="btn btn-link">${bikesList[сounter.count-1].id}</button>
+                            <button type="submit" class="btn btn-link">${bikesList[сounter.count-1].id}<fmt:message key="rent"/></button>
                         </form>
                     </td>
                 </c:if>
