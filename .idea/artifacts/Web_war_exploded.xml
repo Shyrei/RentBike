@@ -13,7 +13,9 @@
           <element id="archive" name="DAO-1.0.jar">
             <element id="module-output" name="DAO" />
           </element>
-          <element id="library" level="project" name="Maven: by.shyrei.rentbike:Entity:1.0-SNAPSHOT" />
+          <element id="archive" name="Entity-1.0.jar">
+            <element id="module-output" name="Entity" />
+          </element>
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jsp-api:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-el-api:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-servlet-api:7.0.47" />
