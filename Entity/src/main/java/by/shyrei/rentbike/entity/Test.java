@@ -7,4 +7,6 @@ package by.shyrei.rentbike.entity;
  */
 public class Test {
     private String gitTest;
+    private String gitHubTest;
+
 }
