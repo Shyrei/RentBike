@@ -8,7 +8,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-servlet-api/7.0.47/tomcat-servlet-api-7.0.47-sources.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-servlet-api/7.0.47/tomcat-servlet-api-7.0.47.jar!/" />
     </SOURCES>
   </library>
 </component>
