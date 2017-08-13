@@ -48,7 +48,6 @@ public class ValidateUser {
     private final static String WRONG_PASSWORD = "password";
     private final static String WRONG_BALANCE = "balance";
 
-    // TODO как сделать привязку к локали ????
     public static String validate(User user){
         if (!FIRST_NAME_PATTERN.matcher(user.getFirstName()).matches()) {
             return WRONG_FIRST_NAME;

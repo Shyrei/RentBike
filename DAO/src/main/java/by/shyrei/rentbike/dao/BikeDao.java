@@ -4,6 +4,7 @@ import by.shyrei.rentbike.db.ConnectionPool;
 import by.shyrei.rentbike.db.ProxyConnection;
 import by.shyrei.rentbike.entity.Bike;
 import by.shyrei.rentbike.exception.DaoException;
+
 import java.sql.*;
 import java.util.*;
 
@@ -13,13 +14,14 @@ import java.util.*;
  * author Shyrei Uladzimir
  */
 public class BikeDao extends AbstractDao<Bike> {
-    private final static String SQL_FIND_ALL_BIKES = "Select bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id from bikes, types, stations where bikes.Stations_Id = stations.Id and bikes.Types_Id = types.Id and bikes.In_Rent = '0' order by bikes.Id;";
-    private final static String SQL_FIND_BY_PAGE = "Select bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id from bikes, types, stations where bikes.Stations_Id = stations.Id and bikes.Types_Id = types.Id and bikes.In_Rent = '0' order by bikes.Id LIMIT ? OFFSET ?;";
-    private final static String SQL_FIND_BY_ID = "Select bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id from bikes, types, stations where bikes.Id = ? and  bikes.Stations_Id = stations.Id and bikes.Types_Id = types.Id order by bikes.Id;";
-    private final static String SQL_FIND_BIKE = "Select bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id  from bikes, types, stations where bikes.Id = ? and bikes.Stations_Id = stations.Id and bikes.Types_Id = types.Id;";
+    private final static String SQL_FIND_ALL_BIKES = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id FROM bikes, types, stations WHERE bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id AND bikes.In_Rent = '0' ORDER BY bikes.Id;";
+    private final static String SQL_FIND_BY_PAGE = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id FROM bikes, types, stations WHERE bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id AND bikes.In_Rent = '0' ORDER BY bikes.Id LIMIT ? OFFSET ?;";
+    private final static String SQL_FIND_BY_ID = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id FROM bikes, types, stations WHERE bikes.Id = ? AND  bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id ORDER BY bikes.Id;";
+    private final static String SQL_FIND_BIKE = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id  FROM bikes, types, stations WHERE bikes.Id = ? AND bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id;";
     private final static String SQL_RENT_TRUE = "UPDATE bikes SET In_Rent = '1' WHERE id = ?;";
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Bikes_Id) VALUES (now(), ?, ?);";
     private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=3 WHERE Id=?;";
+    private final static String SQL_CREATE_BIKE = "INSERT INTO bikes (Types_Id, Stations_Id) VALUES (?, ?);";
     /*SELECT bikes.Id, Type, Price_Per_Hour, City, Location, Image FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent=0 ORDER BY bikes.Id;*/
 
     @Override
@@ -42,6 +44,49 @@ public class BikeDao extends AbstractDao<Bike> {
             close(connection);
         }
         return bikesList;
+    }
+
+    @Override
+    public Bike findEntityById(Integer id) throws DaoException {
+        Bike bike = null;
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_BIKE);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                bike = buildBike(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error in findEntityByID method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return bike;
+    }
+
+    @Override
+    public boolean createEntity(Bike entity) throws DaoException {
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        boolean isCreate;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_CREATE_BIKE);
+            preparedStatement.setInt(1, entity.getTypeId());
+            preparedStatement.setInt(2, entity.getStationId());
+            preparedStatement.executeUpdate();
+            isCreate = true;
+        } catch (SQLException e) {
+            throw new DaoException("Error in createEntity", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return isCreate;
     }
 
     public ArrayList<Bike> findAllByPage(int pageCapacity, int pageNumber) throws DaoException {
@@ -107,28 +152,6 @@ public class BikeDao extends AbstractDao<Bike> {
         return bike;
     }
 
-    @Override
-    public Bike findEntityById(Integer id) throws DaoException {
-        Bike bike = null;
-        ProxyConnection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_BIKE);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                bike = buildBike(resultSet);
-            }
-        } catch (SQLException e) {
-            throw new DaoException("Error in findEntityByID method", e);
-        } finally {
-            close(preparedStatement);
-            close(connection);
-        }
-        return bike;
-    }
-
     private Bike buildBike(ResultSet resultSet) throws SQLException {
         Bike bike = new Bike();
         bike.setId(resultSet.getInt(1));
@@ -142,20 +165,5 @@ public class BikeDao extends AbstractDao<Bike> {
         String pic = Base64.getEncoder().encodeToString(image);
         bike.setPicture(pic);
         return bike;
-    }
-
-    @Override
-    public boolean deleteEntity(Bike entity) {
-        return false;
-    }
-
-    @Override
-    public boolean createEntity(Bike entity) throws DaoException {
-        return false;
-    }
-
-    @Override
-    public Bike updateEntity(Bike entity) {
-        return null;
     }
 }

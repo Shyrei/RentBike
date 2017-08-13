@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Project RentBike
@@ -26,6 +25,49 @@ public class UserDao extends AbstractDao<User> {
     private final static String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login = ?;";
     private final static String SQL_UPDATE_BALANCE = "UPDATE users SET Balance=? WHERE Id=?;";
     private final static String SQL_UPDATE_ROLE = "UPDATE users SET Roles_Id=? WHERE Id=?;";
+
+    @Override
+    public ArrayList<User> findAll() throws DaoException {
+        ArrayList<User> usersList = new ArrayList<>();
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_ALL_USER);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                usersList.add(buildUser(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error in findAll method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return usersList;
+    }
+
+    @Override
+    public User findEntityById(Integer id) throws DaoException {
+        User user = null;
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                user = buildUser(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error in findEntityById method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return user;
+    }
 
     @Override
     public boolean createEntity(User user) throws DaoException {
@@ -49,28 +91,6 @@ public class UserDao extends AbstractDao<User> {
             close(connection);
         }
         return isCreate;
-    }
-
-    @Override
-    public User findEntityById(Integer id) throws DaoException {
-        User user = null;
-        ProxyConnection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_ID);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = buildUser(resultSet);
-            }
-        } catch (SQLException e) {
-            throw new DaoException("Error in findEntityById method", e);
-        } finally {
-            close(preparedStatement);
-            close(connection);
-        }
-        return user;
     }
 
     public User findEntityByLoginAndPassword(String login, String password) throws DaoException {
@@ -131,29 +151,7 @@ public class UserDao extends AbstractDao<User> {
         return user;
     }
 
-    @Override
-    public ArrayList<User> findAll() throws DaoException {
-        ArrayList<User> usersList = new ArrayList<>();
-        ProxyConnection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_ALL_USER);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
-                usersList.add(buildUser(resultSet));
-            }
-        } catch (SQLException e) {
-            throw new DaoException("Error in findAll method", e);
-        } finally {
-            close(preparedStatement);
-            close(connection);
-        }
-        return usersList;
-    }
-
-    @Override
-    public User updateEntity(User user) throws DaoException {
+    public void updateEntity(User user) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -168,7 +166,6 @@ public class UserDao extends AbstractDao<User> {
             close(preparedStatement);
             close(connection);
         }
-        return user;
     }
 
     private User buildUser(ResultSet resultSet) throws SQLException {
@@ -182,12 +179,4 @@ public class UserDao extends AbstractDao<User> {
         user.setRoleId(resultSet.getInt(7));
         return user;
     }
-
-
-
-    @Override
-    public boolean deleteEntity(User entity) {
-        return false;
-    }
-
 }

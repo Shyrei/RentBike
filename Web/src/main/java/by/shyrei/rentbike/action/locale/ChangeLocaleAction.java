@@ -2,8 +2,6 @@ package by.shyrei.rentbike.action.locale;
 
 import by.shyrei.rentbike.action.Action;
 import by.shyrei.rentbike.controller.Router;
-import by.shyrei.rentbike.util.PageConstant;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

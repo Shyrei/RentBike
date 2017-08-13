@@ -8,8 +8,6 @@ import by.shyrei.rentbike.exception.ServiceException;
 import by.shyrei.rentbike.service.RoleService;
 import by.shyrei.rentbike.service.UserService;
 import by.shyrei.rentbike.util.PageConstant;
-
-import javax.accessibility.Accessible;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Project RentBike
@@ -23,34 +22,34 @@ public class OrderDao extends AbstractDao<Order> {
 
     private final static String SQL_FIND_ORDER = "SELECT * FROM orders WHERE Users_Id=? ORDER BY id DESC LIMIT 1;";
     private final static String SQL_FIND_ALL_ORDERS = "SELECT * FROM orders;";
+    private final static String SQL_FIND_UNCLOSED_ORDERS = "SELECT * FROM orders WHERE End_Date IS NULL;";
+    private final static String SQL_FIND_UNCLOSED_USER_ORDER = "SELECT * FROM orders WHERE Users_Id=? AND End_Date IS NULL;";
     private final static String SQL_FIND_ALL_USER_ORDERS = "SELECT * FROM orders WHERE Users_Id=?;";
-    private final static String SQL_FIND_UNCLOSED_ORDER = "SELECT * FROM orders WHERE Users_Id=? AND End_Date is NULL;";
-    private final static String SQL_CLOSE_ORDER = "UPDATE orders SET End_Date=now(), Value=? WHERE Users_Id=? and End_Date is NULL;";
+    private final static String SQL_CLOSE_ORDER = "UPDATE orders SET End_Date=now(), Value=? WHERE Users_Id=? AND End_Date IS NULL;";
     private final static String SQL_UPDATE_USER = "UPDATE users SET Balance=?, Roles_Id=2 WHERE Id=?;";
     private final static String SQL_UPDATE_BIKE = "UPDATE bikes SET In_Rent=0 WHERE Id=?;";
 
-    public Order findUnclosedOrder(Integer userId) throws DaoException {
-        Order order = new Order();
+    @Override
+    public ArrayList<Order> findAll() throws DaoException {
+        ArrayList<Order> ordersList = new ArrayList<>();
+        Order order;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_UNCLOSED_ORDER);
-            preparedStatement.setInt(1, userId);
+            preparedStatement = connection.prepareStatement(SQL_FIND_ALL_ORDERS);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                order.setId(resultSet.getInt(1));
-                order.setStartRent(resultSet.getTimestamp(2).toLocalDateTime());
-                order.setUserId(resultSet.getInt(5));
-                order.setBikeId(resultSet.getInt(6));
+                order = buildOrder(resultSet);
+                ordersList.add(order);
             }
         } catch (SQLException e) {
-            throw new DaoException("Error in findUnclosedOrder method", e);
+            throw new DaoException("Error in findAll method", e);
         } finally {
             close(preparedStatement);
             close(connection);
         }
-        return order;
+        return ordersList;
     }
 
     @Override
@@ -75,17 +74,47 @@ public class OrderDao extends AbstractDao<Order> {
         return order;
     }
 
+    @Override
+    public boolean createEntity(Order entity) throws DaoException {
+        return false;
+    }
+
+
+    public Order findUnclosedOrder(Integer userId) throws DaoException {
+        Order order = new Order();
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_UNCLOSED_USER_ORDER);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                order.setId(resultSet.getInt(1));
+                order.setStartRent(resultSet.getTimestamp(2).toLocalDateTime());
+                order.setUserId(resultSet.getInt(5));
+                order.setBikeId(resultSet.getInt(6));
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error in findUnclosedOrder method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return order;
+    }
+
     public ArrayList<Order> findAllUserOrders(Integer userId) throws DaoException {
         ArrayList<Order> ordersList = new ArrayList<>();
         Order order;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
-        try{
+        try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SQL_FIND_ALL_USER_ORDERS);
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 order = buildOrder(resultSet);
                 ordersList.add(order);
             }
@@ -98,22 +127,21 @@ public class OrderDao extends AbstractDao<Order> {
         return ordersList;
     }
 
-    @Override
-    public ArrayList<Order> findAll() throws DaoException  {
+    public ArrayList<Order> findUnclosed() throws DaoException {
         ArrayList<Order> ordersList = new ArrayList<>();
         Order order;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
-        try{
+        try {
             connection = ConnectionPool.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_ALL_ORDERS);
+            preparedStatement = connection.prepareStatement(SQL_FIND_UNCLOSED_ORDERS);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 order = buildOrder(resultSet);
                 ordersList.add(order);
             }
         } catch (SQLException e) {
-            throw new DaoException("Error in findAll method", e);
+            throw new DaoException("Error in findUnclosed method", e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -164,20 +192,5 @@ public class OrderDao extends AbstractDao<Order> {
         order.setUserId(resultSet.getInt(5));
         order.setBikeId(resultSet.getInt(6));
         return order;
-    }
-
-    @Override
-    public boolean deleteEntity(Order entity) {
-        return false;
-    }
-
-    @Override
-    public boolean createEntity(Order entity) throws DaoException {
-        return false;
-    }
-
-    @Override
-    public Order updateEntity(Order entity) {
-        return null;
     }
 }

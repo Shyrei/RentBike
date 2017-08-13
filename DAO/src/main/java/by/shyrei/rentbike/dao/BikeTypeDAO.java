@@ -5,9 +5,7 @@ import by.shyrei.rentbike.db.ProxyConnection;
 import by.shyrei.rentbike.entity.BikeType;
 import by.shyrei.rentbike.exception.DaoException;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +23,7 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
     private final static String SQL_FIND_ALL_TYPE = "SELECT * FROM types;";
     private final static String SQL_EDIT_PRICE = "UPDATE types SET Price_Per_Hour=? WHERE Id=?;";
     private final static String SQL_CREATE = "INSERT INTO types (Type, Price_per_Hour, Image) VALUES(?,?,?);";
-
+    private final static String SQL_FIND_TYPE_BY_ID = "SELECT * FROM types WHERE id = ?;";
 
     @Override
     public ArrayList<BikeType> findAll() throws DaoException {
@@ -56,7 +54,35 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
         return typesList;
     }
 
-    public BikeType create(BikeType entity, InputStream image) throws DaoException {
+    @Override
+    public BikeType findEntityById(Integer id) throws DaoException {
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        BikeType bikeType = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_TYPE_BY_ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                bikeType = new BikeType();
+                bikeType.setId(resultSet.getInt(1));
+                bikeType.setType(resultSet.getString(2));
+                bikeType.setPrice(resultSet.getBigDecimal(3));
+                Blob photo = resultSet.getBlob(4);
+                byte[] image = photo.getBytes(1, (int) photo.length());
+                String pic = Base64.getEncoder().encodeToString(image);
+                bikeType.setImage(pic);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error in findEntityById method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return bikeType;
+    }
+
+    public void create(BikeType entity, InputStream image) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -72,11 +98,9 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
             close(preparedStatement);
             close(connection);
         }
-        return entity;
     }
 
-    @Override
-    public BikeType updateEntity(BikeType entity) throws DaoException {
+    public void updateEntity(BikeType entity) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -91,24 +115,10 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
             close(preparedStatement);
             close(connection);
         }
-        return entity;
-    }
-
-
-    @Override
-    public BikeType findEntityById(Integer id) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public boolean deleteEntity(BikeType entity) {
-        return false;
     }
 
     @Override
     public boolean createEntity(BikeType entity) throws DaoException {
         return false;
     }
-
-
 }

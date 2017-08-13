@@ -1,13 +1,12 @@
 package by.shyrei.rentbike.action;
 
 import by.shyrei.rentbike.action.admin.*;
-import by.shyrei.rentbike.action.admin.bike.ChangeTypeAction;
-import by.shyrei.rentbike.action.admin.bike.CreateTypeAction;
-import by.shyrei.rentbike.action.admin.bike.GetTypeDataAction;
-import by.shyrei.rentbike.action.admin.bike.ShowAllTypesAction;
+import by.shyrei.rentbike.action.admin.bike.*;
 import by.shyrei.rentbike.action.admin.order.ShowAllOrdersAction;
 import by.shyrei.rentbike.action.admin.order.ShowUnclosedOrdersAction;
 import by.shyrei.rentbike.action.admin.order.ShowUserOrdersAction;
+import by.shyrei.rentbike.action.admin.station.AddStationAction;
+import by.shyrei.rentbike.action.admin.station.ShowAllStationsAction;
 import by.shyrei.rentbike.action.admin.user.*;
 import by.shyrei.rentbike.action.bike.ReturnBikeAction;
 import by.shyrei.rentbike.action.bike.RentBikeAction;
@@ -28,9 +27,13 @@ public enum ActionType {
 
     RENT_BIKE(new RentBikeAction()),
     RETURN_BIKE(new ReturnBikeAction()),
+
     ADD_MONEY(new AddMoneyAction()),
-    ADD_TYPE(new CreateTypeAction()),
-    ADD_ROLE(new CreateRoleAction()),
+    ADD_TYPE(new AddTypeAction()),
+    ADD_STATION(new AddStationAction()),
+    ADD_ROLE(new AddRoleAction()),
+    ADD_BIKE(new AddBikeAction()),
+
     CHANGE_LOCALE (new ChangeLocaleAction()),
     CHANGE_USER(new ChangeUserAction()),
     CHANGE_TYPE(new ChangeTypeAction()),
@@ -42,12 +45,14 @@ public enum ActionType {
     SHOW_ALL_TYPES (new ShowAllTypesAction()),
     SHOW_ALL_ROLES (new ShowAllRoleAction()),
     SHOW_ALL_ORDERS (new ShowAllOrdersAction()),
-    SHOW_ALL_UNCLOSED_ORDERS (new ShowUnclosedOrdersAction()),
+    SHOW_ALL_STATIONS (new ShowAllStationsAction()),
+    SHOW_UNCLOSED_ORDERS (new ShowUnclosedOrdersAction()),
     SHOW_ADMIN_PAGE(new ShowAdminPageAction()),
     SHOW_BIKES_PAGE (new ShowAllBikesByPageAction()),
 
     FIND_USER(new FindUserAction()),
     GET_USER_DATA (new GetUserDataAction()),
+    GET_BIKE_DATA (new GetBikeDataAction()),
     GET_TYPE_DATA (new GetTypeDataAction());
 
     Action action;

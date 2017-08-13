@@ -17,7 +17,7 @@ import java.io.IOException;
  * Created on 31.07.2017.
  * author Shyrei Uladzimir
  */
-public class CreateRoleAction implements Action {
+public class AddRoleAction implements Action {
     private final static String ROLE = "role";
     private final static String MESSAGE = "message";
     private RoleService roleService = new RoleService();
@@ -30,6 +30,7 @@ public class CreateRoleAction implements Action {
             role.setRole(request.getParameter(ROLE));
             roleService.createRole(role);
             router.setPagePath(PageConstant.FIRST_PAGE);
+            router.setRoute(Router.RouteType.REDIRECT);
         } catch (ServiceException e) {
             request.getSession().setAttribute(MESSAGE, e.getMessage());
             router.setPagePath(PageConstant.ERROR_PAGE);

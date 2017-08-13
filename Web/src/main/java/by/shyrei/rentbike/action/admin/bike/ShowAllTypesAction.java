@@ -3,12 +3,9 @@ package by.shyrei.rentbike.action.admin.bike;
 import by.shyrei.rentbike.action.Action;
 import by.shyrei.rentbike.controller.Router;
 import by.shyrei.rentbike.entity.BikeType;
-import by.shyrei.rentbike.entity.User;
 import by.shyrei.rentbike.exception.ServiceException;
 import by.shyrei.rentbike.service.BikeTypeService;
-import by.shyrei.rentbike.service.UserService;
 import by.shyrei.rentbike.util.PageConstant;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

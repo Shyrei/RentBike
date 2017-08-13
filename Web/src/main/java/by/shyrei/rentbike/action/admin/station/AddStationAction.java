@@ -1,36 +1,34 @@
-package by.shyrei.rentbike.action.admin.user;
+package by.shyrei.rentbike.action.admin.station;
 
 import by.shyrei.rentbike.action.Action;
 import by.shyrei.rentbike.controller.Router;
-import by.shyrei.rentbike.entity.User;
+import by.shyrei.rentbike.entity.Station;
 import by.shyrei.rentbike.exception.ServiceException;
-import by.shyrei.rentbike.service.UserService;
+import by.shyrei.rentbike.service.StationService;
 import by.shyrei.rentbike.util.PageConstant;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
 
 /**
  * Project RentBike
- * Created on 25.07.2017.
+ * Created on 04.08.2017.
  * author Shyrei Uladzimir
  */
-public class ChangeUserAction implements Action {
-    private final static String USER_ID = "userId";
-    private final static String ROLE_ID = "roleId";
+public class AddStationAction implements Action {
+    private final static String STATION_CITY = "city";
+    private final static String STATION_LOCATION = "location";
     private final static String MESSAGE = "message";
-    private UserService userService = new UserService();
+    private StationService stationService = new StationService();
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
-        User user = new User();
+        Station station = new Station();
         try {
-            user.setId(Integer.parseInt(request.getParameter(USER_ID)));
-            user.setRoleId(Integer.parseInt(request.getParameter(ROLE_ID)));
-            userService.updateUser(user);
+            station.setCity(request.getParameter(STATION_CITY));
+            station.setLocation(request.getParameter(STATION_LOCATION));
+            stationService.createStation(station);
             router.setPagePath(PageConstant.FIRST_PAGE);
             router.setRoute(Router.RouteType.REDIRECT);
         } catch (ServiceException e) {

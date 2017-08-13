@@ -1,35 +1,33 @@
-package by.shyrei.rentbike.action.admin.user;
+package by.shyrei.rentbike.action.admin.station;
 
 import by.shyrei.rentbike.action.Action;
 import by.shyrei.rentbike.controller.Router;
-import by.shyrei.rentbike.entity.Role;
+import by.shyrei.rentbike.entity.Station;
 import by.shyrei.rentbike.exception.ServiceException;
-import by.shyrei.rentbike.service.RoleService;
+import by.shyrei.rentbike.service.StationService;
 import by.shyrei.rentbike.util.PageConstant;
-import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Project RentBike
- * Created on 31.07.2017.
+ * Created on 03.08.2017.
  * author Shyrei Uladzimir
  */
-public class ShowAllRoleAction implements Action {
-    private final static String ROLES_LIST = "rolesList";
+public class ShowAllStationsAction implements Action {
+    private final static String STATIONS_LIST = "stationsList";
     private final static String MESSAGE = "message";
-    private RoleService roleService = new RoleService();
+    private StationService stationService = new StationService();
 
     @Override
-    public Router execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public Router execute(HttpServletRequest request, HttpServletResponse response) {
         Router router = new Router();
-        ArrayList<Role> rolesList;
         try {
-            rolesList = roleService.findAll();
-            request.setAttribute(ROLES_LIST, rolesList);
-            router.setPagePath(PageConstant.ALL_ROLES);
+            ArrayList<Station> stationsList = stationService.findAll();
+            request.setAttribute(STATIONS_LIST, stationsList);
+            router.setPagePath(PageConstant.ALL_STATIONS);
         } catch (ServiceException e) {
             request.getSession().setAttribute(MESSAGE, e.getMessage());
             router.setPagePath(PageConstant.ERROR_PAGE);
@@ -38,3 +36,4 @@ public class ShowAllRoleAction implements Action {
         return router;
     }
 }
+

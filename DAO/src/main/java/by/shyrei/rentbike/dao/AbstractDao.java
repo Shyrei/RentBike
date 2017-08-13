@@ -25,12 +25,7 @@ public abstract class AbstractDao<T extends Entity> {
 
     public abstract T findEntityById(Integer id) throws DaoException;
 
-    public abstract boolean deleteEntity(T entity);
-
     public abstract boolean createEntity(T entity) throws DaoException;
-
-    public abstract T updateEntity(T entity) throws DaoException;
-
 
     public void close(ProxyConnection connection) {
         try {
@@ -44,7 +39,7 @@ public abstract class AbstractDao<T extends Entity> {
 
     public void close(Statement statement) {
         try {
-            if (statement != null){
+            if (statement != null) {
                 statement.close();
             }
         } catch (SQLException e) {

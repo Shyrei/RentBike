@@ -51,9 +51,17 @@ public class BikeService {
                 MailSender.send(MAIL_SUBJECT, MAIL_TEXT, MAIL_TO);
             }
         } catch (DaoException e) {
-            throw new ServiceException("Transaction failed in findById method", e);
+            throw new ServiceException("Transaction failed in rentBike method", e);
         }
         return bike;
+    }
+
+    public boolean createBike(Bike bike) throws ServiceException {
+        try {
+            return bikeDao.createEntity(bike);
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in createBike method", e);
+        }
     }
 
     private boolean checkNumberOfBikes(Integer stationId) throws DaoException {

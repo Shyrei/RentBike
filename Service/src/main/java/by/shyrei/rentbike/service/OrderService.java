@@ -87,4 +87,12 @@ public class OrderService {
             throw new ServiceException("Transaction failed in findAll method", e);
         }
     }
+
+    public ArrayList<Order> findUnclosed() throws ServiceException {
+        try {
+            return orderDao.findUnclosed();
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in findUnclosed method", e);
+        }
+    }
 }

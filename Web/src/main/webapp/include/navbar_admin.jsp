@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
-
-<%--<nav class="navbar navbar-default navbar-static-top" style="background: #8381eb">--%>
 <nav class="navbar navbar-default navbar-static-top" style="background: #dae5ff">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
@@ -56,7 +53,7 @@
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/controller?action=show_all_orders"><fmt:message key="nav.order.show.all"/></a>
-                    <li><a href="/controller?action=show_all_unclosed_orders"><fmt:message
+                    <li><a href="/controller?action=show_unclosed_orders"><fmt:message
                             key="nav.order.unclosed.orders"/></a>
                     <li class="divider"></li>
                     <li><a href="#"><fmt:message key="search.form.order"/></a>
@@ -100,10 +97,8 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.station"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Текст подпункта</a></li>
-                    <li><a href="#">Текст подпункта</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Текст подпункта</a></li>
+                    <li><a href="/controller?action=show_all_stations"><fmt:message key="nav.station.show.all"/></a>
+                    <li><a href="../includeAdmin/station_add.jsp"><fmt:message key="nav.station.add"/></a></li>
                 </ul>
             </li>
 
@@ -112,8 +107,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><fmt:message key="nav.bike"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Текст подпункта</a></li>
-                    <li><a href="#">Текст подпункта</a></li>
+                    <li><a href="/controller?action=get_bike_data"><fmt:message key="nav.bike.add"/></a>
                     <li class="divider"></li>
                     <li><a href="#">Текст подпункта</a></li>
                 </ul>
