@@ -15,6 +15,11 @@
         <module>Web</module>
     </modules>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
@@ -88,6 +93,8 @@
     </dependencies>
 
     <build>
+       <!-- <finalName>${project.artifactId}</finalName>-->
+       <!-- <outputDirectory>${CATALINA_HOME}/webapps/${project.artifactId}/${project.artifactId}</outputDirectory>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -95,6 +102,8 @@
                 <version>2.2</version>
                 <configuration>
                     <server>tomcat-8.5</server>
+             <!--       <url>http://localhost:8080/manager/text</url>-->
+                    <!--<path>/${project.artifactId}</path>-->
                     <path>/RentBike</path>
                 </configuration>
                 <executions>
