@@ -1,17 +1,12 @@
 <%--@elvariable id="userOne" type="by.shyrei.rentbike.entity.User"--%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.main.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: url(../images/fon1.jpg);
-        }
-    </style>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
 <%@ include file="../include/navbar.jsp" %>
@@ -23,24 +18,26 @@
         </div>
         </c:if>
         <c:if test="${not empty userOne}">
-        <table class="table table-condensed table-bordered">
+        <table class="MyTableOther">
+            <thead>
             <tr>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.user.id"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.user.first.name"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.user.last.name"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.user.login"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.user.password"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.user.balance"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.user.role"/></td>
+                <td><fmt:message key="table.user.id"/></td>
+                <td><fmt:message key="table.user.first.name"/></td>
+                <td><fmt:message key="table.user.last.name"/></td>
+                <td><fmt:message key="table.user.login"/></td>
+                <td><fmt:message key="table.user.password"/></td>
+                <td><fmt:message key="table.user.balance"/></td>
+                <td><fmt:message key="table.user.role"/></td>
             </tr>
+            </thead>
             <tr>
-                <td align="center" style="border-color: #dae5ff">${userOne.id}</td>
-                <td align="center" style="border-color: #dae5ff">${userOne.firstName}</td>
-                <td align="center" style="border-color: #dae5ff">${userOne.lastName}</td>
-                <td align="center" style="border-color: #dae5ff">${userOne.login}</td>
-                <td align="center" style="border-color: #dae5ff">${userOne.password}</td>
-                <td align="center" style="border-color: #dae5ff">${userOne.balance}</td>
-                <td align="center" style="border-color: #dae5ff">${userOne.roleId}</td>
+                <td>${userOne.id}</td>
+                <td>${userOne.firstName}</td>
+                <td>${userOne.lastName}</td>
+                <td>${userOne.login}</td>
+                <td>${userOne.password}</td>
+                <td>${userOne.balance}</td>
+                <td>${userOne.roleId}</td>
             </tr>
         </table>
         </c:if>

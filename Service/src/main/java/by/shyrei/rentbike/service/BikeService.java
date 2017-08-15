@@ -64,6 +64,14 @@ public class BikeService {
         }
     }
 
+    public ArrayList<Bike> findAllOnStation(int stationId) throws ServiceException {
+        try {
+            return bikeDao.findAllOnStation(stationId);
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction findAllOnStation in createBike method", e);
+        }
+    }
+
     private boolean checkNumberOfBikes(Integer stationId) throws DaoException {
         StationDao stationDao = new StationDao();
         int bikesCount = stationDao.checkNumberBikeOnStation(stationId);

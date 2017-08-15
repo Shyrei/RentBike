@@ -1,3 +1,6 @@
+body {
+    background: url(../images/fon1.jpg);
+}
 
 .grid{
     display: grid;
@@ -57,7 +60,6 @@ table.MyTable thead th {
 table.MyTable thead th:first-child {
     border-left: none;
 }
-
 table.MyTable tfoot td {
     font-size: 14px;
 }
@@ -72,12 +74,9 @@ table.MyTable tfoot .links a{
     border-radius: 5px;
 }
 
-
-
-
 table.MyTableMain {
     font-family: "Comic Sans MS", cursive, sans-serif;
-    border: 2px solid #6E7FA4;
+    border: 1px solid #6E7FA4;
     width: 100%;
     text-align: center;
     border-collapse: collapse;
@@ -87,7 +86,6 @@ table.MyTableMain {
 }
 table.MyTableMain td, table.MyTableMain th {
     border: 1px solid #AAAAAA;
-    /*padding: 0px 0px;*/
 }
 table.MyTableMain tbody td {
     font-size: 15px;
@@ -109,7 +107,6 @@ table.MyTableMain thead th {
 table.MyTableMain thead th:first-child {
     border-left: none;
 }
-
 table.MyTableMain tfoot td {
     font-size: 14px;
 }
@@ -117,6 +114,57 @@ table.MyTableMain tfoot .links {
     text-align: right;
 }
 table.MyTableMain tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+
+
+table.MyTableOther {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border: 1px solid #6E7FA4;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    -webkit-box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+    -moz-box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+    box-shadow: 14px 16px 51px 12px rgba(61,46,61,0.87);
+    margin-bottom: 25px;
+}
+table.MyTableOther td, table.MyTableMain th {
+    border: 1px solid #AAAAAA;
+    padding: 10px 5px;
+}
+table.MyTableOther tbody td {
+    font-size: 15px;
+}
+table.MyTableOther thead {
+    background: #6E7FA4;
+    background: -moz-linear-gradient(top, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    background: -webkit-linear-gradient(top, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    background: linear-gradient(to bottom, #929fbb 0%, #7c8bad 66%, #6E7FA4 100%);
+    border-bottom: 2px solid #444444;
+}
+table.MyTableOther thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #D0E4F5;
+}
+table.MyTableOther thead th:first-child {
+    border-left: none;
+}
+table.MyTableOther tfoot td {
+    font-size: 14px;
+}
+table.MyTableOther tfoot .links {
+    text-align: right;
+}
+table.MyTableOther tfoot .links a{
     display: inline-block;
     background: #1C6EA4;
     color: #FFFFFF;

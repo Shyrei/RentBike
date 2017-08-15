@@ -1,17 +1,12 @@
 <%--@elvariable id="bike" type="by.shyrei.rentbike.entity.Bike"--%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.rent.bike.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: url(../images/fon1.jpg);
-        }
-    </style>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
 <%@ include file="../include/navbar.jsp" %>
@@ -20,22 +15,24 @@
         <div class="text-center">
             <h4><fmt:message key="message.ok.rent"/></h4>
         </div>
-        <table class="table table-condensed table-bordered">
+        <table class="MyTableOther">
+            <thead>
             <tr>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.number"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.type"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.price"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.city"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.location"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.rent.photo"/></td>
+                <td><fmt:message key="table.number"/></td>
+                <td><fmt:message key="table.rent.type"/></td>
+                <td><fmt:message key="table.rent.price"/></td>
+                <td><fmt:message key="table.rent.city"/></td>
+                <td><fmt:message key="table.rent.location"/></td>
+                <td><fmt:message key="table.rent.photo"/></td>
             </tr>
+            </thead>
             <tr>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${bike.id}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${bike.type}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${bike.pricePerHour}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${bike.city}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff">${bike.location}</td>
-                <td align="center" style="vertical-align: middle; border-color: #dae5ff"><img src="data:image/jpeg;base64,${bike.picture}"/>
+                <td>${bike.id}</td>
+                <td>${bike.type}</td>
+                <td>${bike.pricePerHour}</td>
+                <td>${bike.city}</td>
+                <td>${bike.location}</td>
+                <td><img src="data:image/jpeg;base64,${bike.picture}"/>
                 </td>
             </tr>
         </table>

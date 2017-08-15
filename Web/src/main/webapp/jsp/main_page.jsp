@@ -1,23 +1,16 @@
 <%--@elvariable id="user" type="by.shyrei.rentbike.entity.User"--%>
 <%--@elvariable id="bikesList" type="java.util.ArrayList"--%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.main.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet" type="text/css" >
-    <style>
-        body {
-            background: url(../images/fon1.jpg);
-        }
-    </style>
 </head>
 <body>
 <%@ include file="../include/navbar.jsp" %>
-
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-6">
     <table class="MyTableMain">
@@ -66,7 +59,6 @@
     </div>
 </div>
 <%@ include file="../include/footer.jsp" %>
-<%--<jsp:include page="../include/footer.jsp"/>--%>
 </body>
 </html>
 

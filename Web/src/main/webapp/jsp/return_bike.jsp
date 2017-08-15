@@ -1,17 +1,12 @@
 <%--@elvariable id="order" type="by.shyrei.rentbike.entity.Order"--%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.return.bike.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: url(../images/fon1.jpg);
-        }
-    </style>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
 <%@ include file="../include/navbar.jsp" %>
@@ -20,18 +15,20 @@
         <div class="text-center">
             <h4><fmt:message key="message.ok.return"/></h4>
         </div>
-        <table class="table table-condensed table-bordered">
+        <table class="MyTableOther">
+            <thead>
             <tr>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.number"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.order.start.rent"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.order.end.rent"/></td>
-                <td align="center" style="border-color: #dae5ff"><fmt:message key="table.order.value"/></td>
+                <td><fmt:message key="table.number"/></td>
+                <td><fmt:message key="table.order.start.rent"/></td>
+                <td><fmt:message key="table.order.end.rent"/></td>
+                <td><fmt:message key="table.order.value"/></td>
             </tr>
+            </thead>
             <tr>
-                <td align="center" style="border-color: #dae5ff">${order.id}</td>
-                <td align="center" style="border-color: #dae5ff">${order.startRent}</td>
-                <td align="center" style="border-color: #dae5ff">${order.endRent}</td>
-                <td align="center" style="border-color: #dae5ff">${order.value}</td>
+                <td>${order.id}</td>
+                <td>${order.startRent}</td>
+                <td>${order.endRent}</td>
+                <td>${order.value}</td>
             </tr>
         </table>
         <a href="../index.jsp" class="btn btn-default"><fmt:message key="continue"/></a>

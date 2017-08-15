@@ -8,10 +8,7 @@ import by.shyrei.rentbike.action.admin.order.ShowUserOrdersAction;
 import by.shyrei.rentbike.action.admin.station.AddStationAction;
 import by.shyrei.rentbike.action.admin.station.ShowAllStationsAction;
 import by.shyrei.rentbike.action.admin.user.*;
-import by.shyrei.rentbike.action.bike.ReturnBikeAction;
-import by.shyrei.rentbike.action.bike.RentBikeAction;
-import by.shyrei.rentbike.action.bike.ShowAllBikesAction;
-import by.shyrei.rentbike.action.bike.ShowAllBikesByPageAction;
+import by.shyrei.rentbike.action.bike.*;
 import by.shyrei.rentbike.action.locale.ChangeLocaleAction;
 import by.shyrei.rentbike.action.user.*;
 
@@ -49,6 +46,8 @@ public enum ActionType {
     SHOW_UNCLOSED_ORDERS (new ShowUnclosedOrdersAction()),
     SHOW_ADMIN_PAGE(new ShowAdminPageAction()),
     SHOW_BIKES_PAGE (new ShowAllBikesByPageAction()),
+    SELECT_BIKE (new SelectBikeAction()),
+    SHOW_BIKES_ON_STATION(new ShowBikesOnStationAction()),
 
     FIND_USER(new FindUserAction()),
     GET_USER_DATA (new GetUserDataAction()),

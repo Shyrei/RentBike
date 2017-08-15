@@ -1,12 +1,10 @@
 <%--@elvariable id="typesList" type="java.util.ArrayList"--%>
 <%--@elvariable id="stationsList" type="java.util.ArrayList"--%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
-    <script type="text/javascript" src="../js/validator.js"></script>
     <title><fmt:message key="title.add.bike.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 </head>

@@ -8,7 +8,8 @@
 
             <%--пользователь--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.user"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                   style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.user"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/controller?action=show_all_users"><fmt:message key="nav.user.show.all"/></a></li>
@@ -39,7 +40,8 @@
 
             <%--роль--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.role"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                   style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.role"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="../includeAdmin/role_add.jsp"><fmt:message key="nav.role.add"/></a></li>
@@ -49,7 +51,9 @@
 
             <%--заказ--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.order"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                   style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message
+                        key="nav.order"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="/controller?action=show_all_orders"><fmt:message key="nav.order.show.all"/></a>
@@ -60,18 +64,24 @@
                         <form action="/controller" method="post" class="form-horizontal">
                             <input type="hidden" name="action" value="show_user_orders">
                             <div class="form-group">
-                                <label for="userForm" class="col-sm-offset-1 col-sm-2 control-label"><fmt:message key="nav.user"/></label>
+                                <label for="userForm" class="col-sm-offset-1 col-sm-2 control-label"><fmt:message
+                                        key="nav.user"/></label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="userForm" name="userId">
                                         <c:forEach items="${usersList}" var="user">
-                                            <option value="${user.id}"><fmt:message key="update.user.id"/> ${user.id}, <fmt:message key="update.user.role"/> ${user.roleId}, <fmt:message key="update.user.first.name"/> ${user.firstName}, <fmt:message key="update.user.login"/> ${user.login}, <fmt:message key="update.user.balance"/> ${user.balance}</option>
+                                            <option value="${user.id}"><fmt:message key="update.user.id"/> ${user.id},
+                                                <fmt:message key="update.user.role"/> ${user.roleId}, <fmt:message
+                                                        key="update.user.first.name"/> ${user.firstName}, <fmt:message
+                                                        key="update.user.login"/> ${user.login}, <fmt:message
+                                                        key="update.user.balance"/> ${user.balance}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <button type="submit" class="btn btn-primary"><fmt:message key="search.form.submit"/></button>
+                                    <button type="submit" class="btn btn-primary"><fmt:message
+                                            key="search.form.submit"/></button>
                                 </div>
                             </div>
                         </form>
@@ -81,35 +91,36 @@
 
             <%--тип--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.type"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                   style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.type"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="../includeAdmin/type_add.jsp"><fmt:message key="nav.type.add"/></a></li>
-                    <li><a href="/controller?action=get_type_data"><fmt:message key="nav.type.edit.price"/></a>
-                    </li>
-                    <li><a href="/controller?action=show_all_types"><fmt:message key="nav.type.show.all"/></a>
-                    </li>
+                    <li><a href="/controller?action=get_type_data"><fmt:message key="nav.type.edit.price"/></a></li>
+                    <li><a href="/controller?action=show_all_types"><fmt:message key="nav.type.show.all"/></a></li>
                 </ul>
             </li>
 
             <%--станция--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.station"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                   style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message
+                        key="nav.station"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/controller?action=show_all_stations"><fmt:message key="nav.station.show.all"/></a>
+                    <li><a href="/controller?action=show_all_stations"><fmt:message key="nav.station.show.all"/></a></li>
                     <li><a href="../includeAdmin/station_add.jsp"><fmt:message key="nav.station.add"/></a></li>
                 </ul>
             </li>
 
             <%--велосипед--%>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.bike"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                   style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.bike"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/controller?action=get_bike_data"><fmt:message key="nav.bike.add"/></a>
-                    <li class="divider"></li>
-                    <li><a href="#">Текст подпункта</a></li>
+                    <li><a href="/controller?action=get_bike_data"><fmt:message key="nav.bike.add"/></a></li>
+                    <li><a href="/controller?action=show_bikes_on_station"><fmt:message key="nav.bike.show.on.station"/></a></li>
                 </ul>
             </li>
         </ul>
@@ -119,11 +130,15 @@
             <form action="/controller" class="navbar-form navbar-right">
                 <fmt:message key="nav.welcome"/><ctg:info user="${user}"/>
                 <input type="hidden" name="action" value="logout">
-                <button type="submit" class="btn btn-default" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.signout"/></button>
+                <button type="submit" class="btn btn-default"
+                        style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message
+                        key="nav.signout"/></button>
             </form>
             <form action="/controller" method="post" class="navbar-form navbar-right">
                 <input type="hidden" name="action" value="show_admin_page">
-                <button type="submit" class="btn btn-default" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.admin"/></button>
+                <button type="submit" class="btn btn-default"
+                        style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message
+                        key="nav.admin"/></button>
             </form>
         </c:if>
     </div>

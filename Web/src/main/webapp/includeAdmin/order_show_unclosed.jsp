@@ -1,37 +1,34 @@
 <%--@elvariable id="ordersList" type="java.util.ArrayList"--%>
 <%--@elvariable id="emptyOrder" type="java.lang.String"--%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.show.unclosed.orders.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: url(../images/fon1.jpg);
-        }
-    </style>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
 <%@ include file="../include/navbar.jsp" %>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-6">
         <c:if test="${not empty ordersList}">
-            <table class="table table-condensed table-bordered">
+            <table class="MyTableOther">
+                <thead>
                 <tr>
-                    <td align="center" style="border-color: #dae5ff"><fmt:message key="table.number"/></td>
-                    <td align="center" style="border-color: #dae5ff"><fmt:message key="table.order.start.rent"/></td>
-                    <td align="center" style="border-color: #dae5ff"><fmt:message key="table.order.end.rent"/></td>
-                    <td align="center" style="border-color: #dae5ff"><fmt:message key="table.order.value"/></td>
+                    <td><fmt:message key="table.number"/></td>
+                    <td><fmt:message key="table.order.start.rent"/></td>
+                    <td><fmt:message key="table.order.end.rent"/></td>
+                    <td><fmt:message key="table.order.value"/></td>
                 </tr>
+                </thead>
                 <c:forEach items="${ordersList}" varStatus="сounter">
                     <tr>
-                        <td align="center" style="border-color: #dae5ff">${ordersList[сounter.count-1].id}</td>
-                        <td align="center" style="border-color: #dae5ff">${ordersList[сounter.count-1].startRent}</td>
-                        <td align="center" style="border-color: #dae5ff">${ordersList[сounter.count-1].endRent}</td>
-                        <td align="center" style="border-color: #dae5ff">${ordersList[сounter.count-1].value}</td>
+                        <td>${ordersList[сounter.count-1].id}</td>
+                        <td>${ordersList[сounter.count-1].startRent}</td>
+                        <td>${ordersList[сounter.count-1].endRent}</td>
+                        <td>${ordersList[сounter.count-1].value}</td>
                     </tr>
                 </c:forEach>
             </table>

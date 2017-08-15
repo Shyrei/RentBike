@@ -22,7 +22,7 @@ public class BikeDao extends AbstractDao<Bike> {
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Bikes_Id) VALUES (now(), ?, ?);";
     private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=3 WHERE Id=?;";
     private final static String SQL_CREATE_BIKE = "INSERT INTO bikes (Types_Id, Stations_Id) VALUES (?, ?);";
-    /*SELECT bikes.Id, Type, Price_Per_Hour, City, Location, Image FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent=0 ORDER BY bikes.Id;*/
+    private final static String SQL_FIND_ALL_ON_STATION = "SELECT bikes.Id, types.Type, types.Price_Per_Hour, stations.City, stations.Location, types.Image, bikes.Stations_Id FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent = 0 AND bikes.Stations_Id = ? ORDER BY bikes.Id;";
 
     @Override
     public ArrayList<Bike> findAll() throws DaoException {
@@ -105,6 +105,28 @@ public class BikeDao extends AbstractDao<Bike> {
             }
         } catch (SQLException e) {
             throw new DaoException("Error in findAllByPage method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return bikesList;
+    }
+
+    public ArrayList<Bike> findAllOnStation(int stationId) throws DaoException {
+        ArrayList<Bike> bikesList = new ArrayList<>();
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_ALL_ON_STATION);
+            preparedStatement.setInt(1, stationId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Bike bike = buildBike(resultSet);
+                bikesList.add(bike);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error in findAllOnStation method", e);
         } finally {
             close(preparedStatement);
             close(connection);

@@ -29,6 +29,14 @@
                     <button type="submit" class="btn btn-default"><fmt:message key="nav.show.orders"/></button>
                 </form>
             </c:if>
+            <%--roleId <=2 displaying a list of bicycles with the possibility to rent them--%>
+            <%--users role: 1 - vip_user; 2 - user; 3 - user_has_order; 4 - blocked user; 5 - administrator--%>
+            <c:if test="${not empty user and user.roleId <= 2}">
+                <form action="/controller" class="navbar-form navbar-right">
+                    <input type="hidden" name="action" value="select_bike">
+                    <button type="submit" class="btn btn-default"><fmt:message key="nav.bike.select"/></button>
+                </form>
+            </c:if>
             <%--roleId == 3 corresponds to the user who has a bicycle in rent--%>
             <%--users role: 1 - vip_user; 2 - user; 3 - user_has_order; 4 - blocked user; 5 - administrator--%>
             <c:if test="${not empty user and user.roleId == 3}">
