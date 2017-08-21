@@ -1,13 +1,11 @@
 package by.shyrei.rentbike.service;
 
 import by.shyrei.rentbike.dao.BikeTypeDAO;
-import by.shyrei.rentbike.entity.Bike;
 import by.shyrei.rentbike.entity.BikeType;
 import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
 
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**

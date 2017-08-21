@@ -4,7 +4,7 @@
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
-    <title>Ajax2 TEST</title>
+    <title><fmt:message key="title.select.bike" /></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="../js/jquery-1.6.2.js"></script>
@@ -17,7 +17,7 @@
                 $.ajax({
                         type: 'GET',
                         data: {station: station},
-                        url: 'ajax',
+                        url: '/ajax',
                         success: function (result) {
                             var bikeList = $.parseJSON(result);
                             var s = '';

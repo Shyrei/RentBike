@@ -2,7 +2,6 @@ package by.shyrei.rentbike.dao;
 
 import by.shyrei.rentbike.db.ConnectionPool;
 import by.shyrei.rentbike.db.ProxyConnection;
-import by.shyrei.rentbike.entity.Bike;
 import by.shyrei.rentbike.entity.Station;
 import by.shyrei.rentbike.exception.DaoException;
 
@@ -10,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Project RentBike
@@ -86,7 +84,7 @@ public class StationDao extends AbstractDao<Station> {
             preparedStatement.executeUpdate();
             isCreate = true;
         } catch (SQLException e) {
-            throw new DaoException("Error in createEntity", e);
+            throw new DaoException("Error in createEntity method", e);
         } finally {
             close(preparedStatement);
             close(connection);

@@ -1,8 +1,6 @@
 package by.shyrei.rentbike.controller;
 
-import by.shyrei.rentbike.dao.BikeDao;
 import by.shyrei.rentbike.entity.Bike;
-import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
 import by.shyrei.rentbike.service.BikeService;
 import by.shyrei.rentbike.util.PageConstant;
@@ -31,7 +29,7 @@ public class AjaxController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Bike> bikesList = new ArrayList<>();
         response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
+        //response.setCharacterEncoding("UTF-8");
         int stationId = Integer.parseInt(request.getParameter(STATION));
         try {
             bikesList = bikeService.findAllOnStation(stationId);

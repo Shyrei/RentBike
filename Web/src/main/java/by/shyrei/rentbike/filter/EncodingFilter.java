@@ -1,9 +1,7 @@
 package by.shyrei.rentbike.filter;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
 /**
@@ -11,11 +9,12 @@ import java.io.IOException;
  * Created on 14.07.2017.
  * author Shyrei Uladzimir
  */
-@WebFilter("/controller")
+@WebFilter(urlPatterns ={"/controller", "/ajax"})
 public class EncodingFilter implements Filter{
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         chain.doFilter(request, response);
     }
 

@@ -21,9 +21,6 @@ public class MailSender {
     private final static String USER_MAIL = EmailManager.getProperty("userMail");
     private final static String PASSWORD = EmailManager.getProperty("password");
 
-    /*private final static String USER_MAIL = "uab.alextrans@gmail.com";
-    private final static String PASSWORD = "milana1807";*/
-
     public static void send(String subject, String text, String toEmail) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

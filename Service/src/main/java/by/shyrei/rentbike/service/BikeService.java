@@ -57,9 +57,9 @@ public class BikeService {
         return bike;
     }
 
-    public boolean createBike(Bike bike) throws ServiceException {
+    public void createBike(Bike bike) throws ServiceException {
         try {
-            return bikeDao.createEntity(bike);
+            bikeDao.createEntity(bike);
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in createBike method", e);
         }
@@ -69,7 +69,30 @@ public class BikeService {
         try {
             return bikeDao.findAllOnStation(stationId);
         } catch (DaoException e) {
-            throw new ServiceException("Transaction findAllOnStation in createBike method", e);
+            throw new ServiceException("Transaction failed in findAllOnStation in createBike method", e);
+        }
+    }
+
+    public Bike findById(int bikeId) throws ServiceException {
+        try {
+            return bikeDao.findEntityById(bikeId);
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in findById in createBike method", e);
+        }
+    }
+
+    public void changeBike(int bikeId) throws ServiceException {
+        Bike bike = null;
+        try {
+            bike = bikeDao.findEntityById(bikeId);
+            if (bike.isAvailable()) {
+                bike.setAvailable(false);
+            } else {
+                bike.setAvailable(true);
+            }
+            bikeDao.changeEntity(bike);
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in changeBike in createBike method", e);
         }
     }
 

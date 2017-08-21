@@ -3,8 +3,6 @@ package by.shyrei.rentbike.controller;
 import by.shyrei.rentbike.action.Action;
 import by.shyrei.rentbike.action.ActionFactory;
 import by.shyrei.rentbike.util.PageConstant;
-
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;

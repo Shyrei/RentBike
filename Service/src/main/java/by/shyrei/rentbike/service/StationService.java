@@ -1,8 +1,6 @@
 package by.shyrei.rentbike.service;
 
 import by.shyrei.rentbike.dao.StationDao;
-import by.shyrei.rentbike.entity.Order;
-import by.shyrei.rentbike.entity.Role;
 import by.shyrei.rentbike.entity.Station;
 import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
@@ -26,9 +24,9 @@ public class StationService {
         }
     }
 
-    public boolean createStation(Station station) throws ServiceException {
+    public void createStation(Station station) throws ServiceException {
         try {
-            return stationDao.createEntity(station);
+            stationDao.createEntity(station);
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in createStation method", e);
         }

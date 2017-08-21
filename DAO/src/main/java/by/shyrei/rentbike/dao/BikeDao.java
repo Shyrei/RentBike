@@ -14,15 +14,15 @@ import java.util.*;
  * author Shyrei Uladzimir
  */
 public class BikeDao extends AbstractDao<Bike> {
-    private final static String SQL_FIND_ALL_BIKES = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id FROM bikes, types, stations WHERE bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id AND bikes.In_Rent = '0' ORDER BY bikes.Id;";
-    private final static String SQL_FIND_BY_PAGE = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id FROM bikes, types, stations WHERE bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id AND bikes.In_Rent = '0' ORDER BY bikes.Id LIMIT ? OFFSET ?;";
-    private final static String SQL_FIND_BY_ID = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id FROM bikes, types, stations WHERE bikes.Id = ? AND  bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id ORDER BY bikes.Id;";
-    private final static String SQL_FIND_BIKE = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id  FROM bikes, types, stations WHERE bikes.Id = ? AND bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id;";
+    private final static String SQL_FIND_ALL_BIKES = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes, types, stations WHERE bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id AND bikes.In_Rent = '0' AND bikes.Is_Available = '1' ORDER BY bikes.Id;";
+    private final static String SQL_FIND_BY_PAGE = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes, types, stations WHERE bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id AND bikes.In_Rent = '0' AND bikes.Is_Available = '1' ORDER BY bikes.Id LIMIT ? OFFSET ?;";
+    private final static String SQL_FIND_BY_ID = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes, types, stations WHERE bikes.Id = ? AND  bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id;";
     private final static String SQL_RENT_TRUE = "UPDATE bikes SET In_Rent = '1' WHERE id = ?;";
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Bikes_Id) VALUES (now(), ?, ?);";
     private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=3 WHERE Id=?;";
     private final static String SQL_CREATE_BIKE = "INSERT INTO bikes (Types_Id, Stations_Id) VALUES (?, ?);";
-    private final static String SQL_FIND_ALL_ON_STATION = "SELECT bikes.Id, types.Type, types.Price_Per_Hour, stations.City, stations.Location, types.Image, bikes.Stations_Id FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent = 0 AND bikes.Stations_Id = ? ORDER BY bikes.Id;";
+    private final static String SQL_FIND_ALL_ON_STATION = "SELECT bikes.Id, types.Type, types.Price_Per_Hour, stations.City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent = '0' AND bikes.Is_Available = '1' AND bikes.Stations_Id = ? ORDER BY bikes.Id;";
+    private final static String SQL_CHANGE_BIKE_STATUS = "UPDATE bikes SET Is_Available=? WHERE Id=?;";
 
     @Override
     public ArrayList<Bike> findAll() throws DaoException {
@@ -53,7 +53,7 @@ public class BikeDao extends AbstractDao<Bike> {
         PreparedStatement preparedStatement = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SQL_FIND_BIKE);
+            preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -81,7 +81,7 @@ public class BikeDao extends AbstractDao<Bike> {
             preparedStatement.executeUpdate();
             isCreate = true;
         } catch (SQLException e) {
-            throw new DaoException("Error in createEntity", e);
+            throw new DaoException("Error in createEntity method", e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -174,6 +174,23 @@ public class BikeDao extends AbstractDao<Bike> {
         return bike;
     }
 
+    public void changeEntity(Bike bike) throws DaoException {
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_CHANGE_BIKE_STATUS);
+            preparedStatement.setBoolean(1, bike.isAvailable());
+            preparedStatement.setInt(2, bike.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Error in changeEntity method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+    }
+
     private Bike buildBike(ResultSet resultSet) throws SQLException {
         Bike bike = new Bike();
         bike.setId(resultSet.getInt(1));
@@ -188,6 +205,8 @@ public class BikeDao extends AbstractDao<Bike> {
             String pic = Base64.getEncoder().encodeToString(image);
             bike.setPicture(pic);
         }
+        bike.setAvailable(resultSet.getBoolean(8));
+        bike.setInRent(resultSet.getBoolean(9));
         return bike;
     }
 }

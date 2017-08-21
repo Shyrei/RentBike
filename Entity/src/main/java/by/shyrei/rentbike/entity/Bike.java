@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Bike extends Entity {
     private int id;
     private boolean inRent;
+    private boolean isAvailable;
     private int typeId;
     private int stationId;
     private String type;
@@ -22,9 +23,10 @@ public class Bike extends Entity {
     public Bike() {
     }
 
-    public Bike(int id, boolean inRent, int typeId, int stationId, String type, BigDecimal pricePerHour, String city, String location, String picture) {
+    public Bike(int id, boolean inRent, boolean isAvailable, int typeId, int stationId, String type, BigDecimal pricePerHour, String city, String location, String picture) {
         this.id = id;
         this.inRent = inRent;
+        this.isAvailable = isAvailable;
         this.typeId = typeId;
         this.stationId = stationId;
         this.type = type;
@@ -48,6 +50,14 @@ public class Bike extends Entity {
 
     public void setInRent(boolean inRent) {
         this.inRent = inRent;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public int getTypeId() {
@@ -113,6 +123,7 @@ public class Bike extends Entity {
         Bike bike = (Bike) o;
         return getId() == bike.getId() &&
                 isInRent() == bike.isInRent() &&
+                isAvailable() == bike.isAvailable() &&
                 getTypeId() == bike.getTypeId() &&
                 getStationId() == bike.getStationId() &&
                 Objects.equals(getType(), bike.getType()) &&
@@ -124,7 +135,7 @@ public class Bike extends Entity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), isInRent(), getTypeId(), getStationId(), getType(), getPricePerHour(), getCity(), getLocation(), getPicture());
+        return Objects.hash(getId(), isInRent(), isAvailable(), getTypeId(), getStationId(), getType(), getPricePerHour(), getCity(), getLocation(), getPicture());
     }
 
     @Override
@@ -132,6 +143,7 @@ public class Bike extends Entity {
         return "Bike{" +
                 "id=" + id +
                 ", inRent=" + inRent +
+                ", isAvailable=" + isAvailable +
                 ", typeId=" + typeId +
                 ", stationId=" + stationId +
                 ", type='" + type + '\'' +

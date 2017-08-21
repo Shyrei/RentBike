@@ -2,7 +2,6 @@ package by.shyrei.rentbike.service;
 
 import by.shyrei.rentbike.dao.RoleDao;
 import by.shyrei.rentbike.entity.Role;
-import by.shyrei.rentbike.entity.User;
 import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
 
@@ -24,9 +23,9 @@ public class RoleService {
         }
     }
 
-    public boolean createRole(Role role) throws ServiceException {
+    public void createRole(Role role) throws ServiceException {
         try {
-            return roleDao.createEntity(role);
+            roleDao.createEntity(role);
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in createRole method", e);
         }

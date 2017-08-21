@@ -34,6 +34,7 @@ public enum ActionType {
     CHANGE_LOCALE (new ChangeLocaleAction()),
     CHANGE_USER(new ChangeUserAction()),
     CHANGE_TYPE(new ChangeTypeAction()),
+    CHANGE_BIKE(new ChangeBikeStatusAction()),
 
     SHOW_ORDERS(new ShowOrdersAction()),
     SHOW_USER_ORDERS(new ShowUserOrdersAction()),
@@ -50,6 +51,7 @@ public enum ActionType {
     SHOW_BIKES_ON_STATION(new ShowBikesOnStationAction()),
 
     FIND_USER(new FindUserAction()),
+    FIND_BIKE (new FindBikeAction()),
     GET_USER_DATA (new GetUserDataAction()),
     GET_BIKE_DATA (new GetBikeDataAction()),
     GET_TYPE_DATA (new GetTypeDataAction());

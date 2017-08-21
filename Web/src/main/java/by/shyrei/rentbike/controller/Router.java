@@ -1,7 +1,5 @@
 package by.shyrei.rentbike.controller;
 
-import java.util.Objects;
-
 /**
  * Project RentBike
  * Created on 17.07.2017.

@@ -1,10 +1,11 @@
-<%--@elvariable id="userOne" type="by.shyrei.rentbike.entity.User"--%>
+<%--@elvariable id="user" type="by.shyrei.rentbike.entity.User"--%>
+<%--@elvariable id="emptyUser" type="java.lang.String"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../include/uselocale.jsp" %>
 <html>
 <head>
-    <title><fmt:message key="title.main.page"/></title>
+    <title><fmt:message key="title.show.user.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet" type="text/css" >
 </head>
@@ -17,7 +18,7 @@
             <h4><fmt:message key="message.empty.user"/></h4>
         </div>
         </c:if>
-        <c:if test="${not empty userOne}">
+        <c:if test="${not empty user}">
         <table class="MyTableOther">
             <thead>
             <tr>
@@ -31,13 +32,13 @@
             </tr>
             </thead>
             <tr>
-                <td>${userOne.id}</td>
-                <td>${userOne.firstName}</td>
-                <td>${userOne.lastName}</td>
-                <td>${userOne.login}</td>
-                <td>${userOne.password}</td>
-                <td>${userOne.balance}</td>
-                <td>${userOne.roleId}</td>
+                <td>${user.id}</td>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+                <td>${user.login}</td>
+                <td>${user.password}</td>
+                <td>${user.balance}</td>
+                <td>${user.roleId}</td>
             </tr>
         </table>
         </c:if>

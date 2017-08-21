@@ -39,7 +39,7 @@ public class RoleDao extends AbstractDao<Role> {
                 rolesList.add(role);
             }
         } catch (SQLException e) {
-            throw new DaoException("Error in findAll", e);
+            throw new DaoException("Error in findAll method", e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -62,7 +62,7 @@ public class RoleDao extends AbstractDao<Role> {
                 role.setRole(resultSet.getString(2));
             }
         } catch (SQLException e) {
-            throw new DaoException("Error in findEntityById", e);
+            throw new DaoException("Error in findEntityById method", e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -82,7 +82,7 @@ public class RoleDao extends AbstractDao<Role> {
             preparedStatement.executeUpdate();
             isCreate = true;
         } catch (SQLException e) {
-            throw new DaoException("Error in createEntity", e);
+            throw new DaoException("Error in createEntity method", e);
         } finally {
             close(preparedStatement);
             close(connection);

@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 public class FindUserAction implements Action {
     private final static String USER_ID = "userId";
-    private final static String USER = "userOne";
+    private final static String USER = "user";
     private final static String EMPTY_USER = "emptyUser";
     private final static String MESSAGE = "message";
     private UserService userService = new UserService();

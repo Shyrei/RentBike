@@ -31,6 +31,7 @@ public class PageConstant {
     public final static String ADD_BIKE = "includeAdmin/bike_add.jsp";
     public final static String UNCLOSED_ORDERS = "includeAdmin/order_show_unclosed.jsp";
     public final static String ONE_USER = "includeAdmin/user_show_one.jsp";
+    public final static String ONE_BIKE = "includeAdmin/bike_show_one.jsp";
     public final static String USER_ORDER = "includeAdmin/order_show_userId.jsp";
     public final static String BIKES_ON_STATION = "includeAdmin/bike_show_on_station.jsp";
 
