@@ -131,14 +131,12 @@
                 <fmt:message key="nav.welcome"/><ctg:info user="${user}"/>
                 <input type="hidden" name="action" value="logout">
                 <button type="submit" class="btn btn-default"
-                        style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message
-                        key="nav.signout"/></button>
+                        style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.signout"/></button>
             </form>
             <form action="/controller" method="post" class="navbar-form navbar-right">
                 <input type="hidden" name="action" value="show_admin_page">
                 <button type="submit" class="btn btn-default"
-                        style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message
-                        key="nav.admin"/></button>
+                        style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.admin"/></button>
             </form>
         </c:if>
     </div>

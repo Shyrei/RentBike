@@ -183,9 +183,11 @@ public class BikeDao extends AbstractDao<Bike> {
         bike.setLocation(resultSet.getString(5));
         Blob photo = resultSet.getBlob(6);
         bike.setStationId(resultSet.getInt(7));
-        byte[] image = photo.getBytes(1, (int) photo.length());
-        String pic = Base64.getEncoder().encodeToString(image);
-        bike.setPicture(pic);
+        if (photo != null) {
+            byte[] image = photo.getBytes(1, (int) photo.length());
+            String pic = Base64.getEncoder().encodeToString(image);
+            bike.setPicture(pic);
+        }
         return bike;
     }
 }

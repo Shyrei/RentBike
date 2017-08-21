@@ -5,6 +5,7 @@ import by.shyrei.rentbike.dao.StationDao;
 import by.shyrei.rentbike.entity.Bike;
 import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
+import by.shyrei.rentbike.util.EmailManager;
 import by.shyrei.rentbike.util.MailSender;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
  * author Shyrei Uladzimir
  */
 public class BikeService {
-    private final static Integer MIN_NUMBER_BIKE_ON_STATION = 5;
-    private final static String MAIL_TO = "lis2002_2002@mail.ru";
+    private final static Integer MIN_NUMBER_BIKE_ON_STATION = Integer.parseInt(EmailManager.getProperty("bikeOnStation"));
+    private final static String MAIL_TO = EmailManager.getProperty("mailTo");
     private final static String MAIL_SUBJECT = "Warning: RentBike";
     private final static String MAIL_TEXT = "The number of bicycles at the station is less than";
 

@@ -64,12 +64,21 @@
             <version>1.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+       <!-- &lt;!&ndash; https://mvnrepository.com/artifact/mysql/mysql-connector-java &ndash;&gt;
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.40</version>
+        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.24</version>
         </dependency>
+
+
 
         <!-- https://mvnrepository.com/artifact/javax.activation/activation -->
         <dependency>
@@ -101,8 +110,6 @@
     </dependencies>
 
     <build>
-       <!-- <finalName>${project.artifactId}</finalName>-->
-       <!-- <outputDirectory>${CATALINA_HOME}/webapps/${project.artifactId}/${project.artifactId}</outputDirectory>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -110,8 +117,6 @@
                 <version>2.2</version>
                 <configuration>
                     <server>tomcat-8.5</server>
-             <!--       <url>http://localhost:8080/manager/text</url>-->
-                    <!--<path>/${project.artifactId}</path>-->
                     <path>/RentBike</path>
                 </configuration>
                 <executions>

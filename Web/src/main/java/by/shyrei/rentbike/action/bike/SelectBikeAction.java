@@ -30,7 +30,7 @@ public class SelectBikeAction implements Action {
         try {
             stationsList = stationService.findAll();
             request.setAttribute(STATIONS_LIST, stationsList);
-            router.setPagePath(PageConstant.TEST);
+            router.setPagePath(PageConstant.SELECT_BIKE);
         } catch (ServiceException e) {
             request.getSession().setAttribute(MESSAGE, e.getMessage());
             router.setPagePath(PageConstant.ERROR_PAGE);

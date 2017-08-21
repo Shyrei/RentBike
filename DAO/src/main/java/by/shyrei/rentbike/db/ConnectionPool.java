@@ -9,6 +9,7 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -61,6 +62,10 @@ public class ConnectionPool {
         }
     }
 
+    public int getSize(){
+        return queue.size();
+    }
+
     public static ConnectionPool getInstance() {
         if (!CREATE_INSTANCE.get()) {
             lock.lock();
@@ -86,14 +91,14 @@ public class ConnectionPool {
         return connection;
     }
 
-    public void releaseConnection(ProxyConnection connection) {
+    void releaseConnection(ProxyConnection connection) {
         queue.add(connection);
     }
 
     public void closeConnectionPool() {
         for (ProxyConnection connection : queue) {
             try {
-                connection.connectionClose(queue.take());
+                queue.take().connectionClose();
             } catch (SQLException | InterruptedException e) {
                 LOGGER.log(Level.ERROR, e.getMessage());
             }

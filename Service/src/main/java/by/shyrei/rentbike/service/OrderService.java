@@ -7,13 +7,11 @@ import by.shyrei.rentbike.entity.Order;
 import by.shyrei.rentbike.entity.User;
 import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
-import com.sun.org.apache.xpath.internal.operations.Or;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 /**
  * Project RentBike
@@ -29,7 +27,7 @@ public class OrderService {
         return user.getBalance().intValue() >= value.intValue();
     }
 
-    public BigDecimal calculateOrder(User user) throws ServiceException {
+    private BigDecimal calculateOrder(User user) throws ServiceException {
         Order order;
         Bike bike;
         BigDecimal value;

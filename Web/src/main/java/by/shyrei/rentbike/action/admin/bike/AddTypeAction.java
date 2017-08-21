@@ -34,8 +34,8 @@ public class AddTypeAction implements Action {
             bikeType.setType(request.getParameter(TYPE_TYPE));
             bikeType.setPrice(new BigDecimal(request.getParameter(TYPE_PRICE)));
             Part filePart = request.getPart(TYPE_PHOTO);
-            InputStream inputStream = filePart.getInputStream();
-            bikeTypeService.create(bikeType, inputStream);
+            InputStream image = filePart.getInputStream();
+            bikeTypeService.create(bikeType, image);
             router.setPagePath(PageConstant.FIRST_PAGE);
             router.setRoute(Router.RouteType.REDIRECT);
         } catch (ServiceException | ServletException | IOException e) {

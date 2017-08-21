@@ -18,8 +18,11 @@ import java.util.Properties;
  */
 public class MailSender {
     private final static Logger LOGGER = LogManager.getLogger(MailSender.class);
-    private final static String USER_MAIL = "uab.alextrans@gmail.com";
-    private final static String PASSWORD = "milana1807";
+    private final static String USER_MAIL = EmailManager.getProperty("userMail");
+    private final static String PASSWORD = EmailManager.getProperty("password");
+
+    /*private final static String USER_MAIL = "uab.alextrans@gmail.com";
+    private final static String PASSWORD = "milana1807";*/
 
     public static void send(String subject, String text, String toEmail) {
         Properties props = new Properties();

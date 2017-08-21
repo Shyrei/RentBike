@@ -2,6 +2,4 @@
 .idea
 target
 .gitignore
-DAO/src/test/
-Service/src/main/resources/
-Web/src/test/
+

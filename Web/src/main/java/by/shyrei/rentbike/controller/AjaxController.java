@@ -22,26 +22,11 @@ import java.util.ArrayList;
  * Created on 14.08.2017.
  * author Shyrei Uladzimir
  */
-@WebServlet(name = "Ajax", urlPatterns = "/Ajax")
+@WebServlet(name = "ajax", urlPatterns = "/ajax")
 public class AjaxController extends HttpServlet {
     private final static String STATION = "station";
     private final static String MESSAGE = "message";
     private BikeService bikeService = new BikeService();
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Bike> bikesList = new ArrayList<>();
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        int stationId = Integer.parseInt(request.getParameter(STATION));
-        try {
-            bikesList = bikeService.findAllOnStation(stationId);
-        } catch (ServiceException e) {
-            request.getSession().setAttribute(MESSAGE, e.getMessage());
-            response.sendRedirect(PageConstant.ERROR_PAGE);
-        }
-        PrintWriter out = response.getWriter();
-        out.print(new Gson().toJson(bikesList));
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Bike> bikesList = new ArrayList<>();

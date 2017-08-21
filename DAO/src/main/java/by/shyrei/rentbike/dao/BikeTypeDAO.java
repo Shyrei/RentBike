@@ -40,9 +40,11 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
                 bikeType.setType(resultSet.getString(2));
                 bikeType.setPrice(resultSet.getBigDecimal(3));
                 Blob photo = resultSet.getBlob(4);
-                byte[] image = photo.getBytes(1, (int) photo.length());
-                String pic = Base64.getEncoder().encodeToString(image);
-                bikeType.setImage(pic);
+                if (photo != null) {
+                    byte[] image = photo.getBytes(1, (int) photo.length());
+                    String pic = Base64.getEncoder().encodeToString(image);
+                    bikeType.setImage(pic);
+                }
                 typesList.add(bikeType);
             }
         } catch (SQLException e) {

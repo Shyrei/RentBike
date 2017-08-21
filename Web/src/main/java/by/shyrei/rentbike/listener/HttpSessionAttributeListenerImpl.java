@@ -19,12 +19,6 @@ public class HttpSessionAttributeListenerImpl implements HttpSessionAttributeLis
     @Override
     public void attributeAdded(HttpSessionBindingEvent httpSessionBindingEvent) {
         HttpSession session = httpSessionBindingEvent.getSession();
-        // TODO тут выскакивает nullPointer
-        /*if ((Boolean) session.getAttribute(INVALIDATE)) {
-            httpSessionBindingEvent.getSession().invalidate();
-        }*/
-
-        // TODO переписал вот так:
         Enumeration<String> list = session.getAttributeNames();
         while (list.hasMoreElements()) {
             if (list.nextElement().equals(INVALIDATE)) {

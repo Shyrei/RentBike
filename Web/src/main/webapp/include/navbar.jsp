@@ -8,10 +8,10 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <c:if test="${empty user}">
-                <form action="/jsp/user_login.jsp" class="navbar-form navbar-right">
+                <form action="../jsp/user_login.jsp" class="navbar-form navbar-right">
                     <button type="submit" class="btn btn-default"><fmt:message key="nav.signin"/></button>
                 </form>
-                <form action="/jsp/user_register.jsp" class="navbar-form navbar-right">
+                <form action="../jsp/user_register.jsp" class="navbar-form navbar-right">
                     <button type="submit" class="btn btn-default"><fmt:message key="nav.register"/></button>
                 </form>
             </c:if>

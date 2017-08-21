@@ -5,6 +5,6 @@
     <title>Index</title>
 </head>
 <body>
-<c:redirect url="controller?action=show_bikes_page"/>
+<c:redirect url="/controller?action=show_bikes_page"/>
 </body>
 </html>

@@ -17,7 +17,7 @@
                 $.ajax({
                         type: 'GET',
                         data: {station: station},
-                        url: '/Ajax',
+                        url: 'ajax',
                         success: function (result) {
                             var bikeList = $.parseJSON(result);
                             var s = '';

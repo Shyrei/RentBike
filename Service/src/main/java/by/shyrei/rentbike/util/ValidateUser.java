@@ -1,9 +1,6 @@
 package by.shyrei.rentbike.util;
 
 import by.shyrei.rentbike.entity.User;
-import com.sun.org.apache.regexp.internal.RE;
-
-import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 /**
@@ -36,17 +33,11 @@ public class ValidateUser {
      */
     private final static Pattern PASSWORD_PATTERN =
             Pattern.compile("[a-zA-Z0-9._*]{3,6}");
-    /**
-     * Only digits, up to 6 characters
-     */
-    private final static Pattern BALANCE_PATTERN =
-            Pattern.compile("[0-9]{1,6}");
 
     private final static String WRONG_FIRST_NAME = "firstName";
     private final static String WRONG_LAST_NAME = "lastName";
     private final static String WRONG_LOGIN = "login";
     private final static String WRONG_PASSWORD = "password";
-    private final static String WRONG_BALANCE = "balance";
 
     public static String validate(User user){
         if (!FIRST_NAME_PATTERN.matcher(user.getFirstName()).matches()) {
@@ -64,10 +55,6 @@ public class ValidateUser {
         if (!PASSWORD_PATTERN.matcher(user.getPassword()).matches()) {
             return WRONG_PASSWORD;
         }
-
-        /*if (!BALANCE_PATTERN.matcher((user.getBalance()).toString()).matches()) {
-            return WRONG_BALANCE;
-        }*/
         return null;
     }
 

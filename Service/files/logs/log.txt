@@ -1,0 +1,4 @@
+{16-08-2017 13:37:31} {main} {FATAL} {shyrei.rentbike.util.EmailManager} {line 40} {Can't find bundle for base name email, locale ru_RU} 
+{16-08-2017 13:41:01} {main} {ERROR} {shyrei.rentbike.util.MailSender} {line 46} {Could not send emailIllegal whitespace in address} 
+{16-08-2017 13:41:36} {main} {ERROR} {shyrei.rentbike.util.MailSender} {line 46} {Could not send emailIllegal whitespace in address} 
+{16-08-2017 13:46:54} {main} {ERROR} {shyrei.rentbike.util.MailSender} {line 46} {Could not send emailIllegal whitespace in address} 

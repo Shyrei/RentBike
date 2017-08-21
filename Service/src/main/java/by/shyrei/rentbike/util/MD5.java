@@ -10,8 +10,9 @@ import java.security.NoSuchAlgorithmException;
  * author Shyrei Uladzimir
  */
 public class MD5 {
+
     public static String md5Encode(String password) {
-        MessageDigest messageDigest = null;
+        MessageDigest messageDigest;
         byte[] digest = new byte[0];
         try {
             messageDigest = MessageDigest.getInstance("MD5");
@@ -22,10 +23,9 @@ public class MD5 {
             e.printStackTrace();
         }
         BigInteger bigInt = new BigInteger(1, digest);
-        String md5Hex = bigInt.toString(16);
-       /* while (md5Hex.length() < 32) {
+        /* while (md5Hex.length() < 32) {
             md5Hex = "0" + md5Hex;
         }*/
-        return md5Hex;
+        return bigInt.toString(16);
     }
 }

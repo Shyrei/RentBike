@@ -13,9 +13,9 @@
             $('#station').change(function () {
                 var station = $('#station').val();
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     data: {station: station},
-                    url: 'Ajax',
+                    url: 'ajax',
                     success: function (result) {
                         var bikeList = $.parseJSON(result);
                         var s = '';

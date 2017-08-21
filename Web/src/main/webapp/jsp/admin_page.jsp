@@ -10,11 +10,6 @@
     <title><fmt:message key="title.admin.page"/></title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet" type="text/css" >
-    <style>
-        body {
-            background: url(../images/fon1.jpg);
-        }
-    </style>
 </head>
 <body>
 <%@include file="../include/navbar_admin.jsp" %>

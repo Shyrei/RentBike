@@ -15,6 +15,7 @@ public class PageConstant {
 
     public final static String RENT_BIKE = "jsp/rent_bike.jsp";
     public final static String RETURN_BIKE = "jsp/return_bike.jsp";
+    public final static String SELECT_BIKE = "jsp/select_bike.jsp";
     public final static String ADD_MONEY = "jsp/user_add_money.jsp";
     public final static String USER_ORDERS = "jsp/user_orders.jsp";
 
@@ -32,7 +33,5 @@ public class PageConstant {
     public final static String ONE_USER = "includeAdmin/user_show_one.jsp";
     public final static String USER_ORDER = "includeAdmin/order_show_userId.jsp";
     public final static String BIKES_ON_STATION = "includeAdmin/bike_show_on_station.jsp";
-
-    public final static String TEST = "jsp/test.jsp";
 
 }

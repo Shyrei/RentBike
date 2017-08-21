@@ -22,7 +22,7 @@ public class ProxyConnection implements Connection {
         ConnectionPool.getInstance().releaseConnection(this);
     }
 
-    void connectionClose(Connection connection) throws SQLException{
+    void connectionClose() throws SQLException{
         connection.close();
     }
 
