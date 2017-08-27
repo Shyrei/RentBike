@@ -9,7 +9,6 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -98,7 +97,8 @@ public class ConnectionPool {
     public void closeConnectionPool() {
         for (ProxyConnection connection : queue) {
             try {
-                queue.take().connectionClose();
+                connection = queue.take();
+                connection.connectionClose();
             } catch (SQLException | InterruptedException e) {
                 LOGGER.log(Level.ERROR, e.getMessage());
             }
