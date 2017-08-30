@@ -61,7 +61,7 @@ public class ConnectionPool {
         }
     }
 
-    public int getSize(){
+    public int getSize() {
         return queue.size();
     }
 
@@ -105,7 +105,7 @@ public class ConnectionPool {
         }
         try {
             Enumeration<Driver> drivers = DriverManager.getDrivers();
-            while (drivers.hasMoreElements()){
+            while (drivers.hasMoreElements()) {
                 Driver driver = drivers.nextElement();
                 DriverManager.deregisterDriver(driver);
             }

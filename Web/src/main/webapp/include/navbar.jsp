@@ -3,10 +3,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%--<nav class="navbar navbar-default navbar-static-top" style="background: #dae5ff">--%>
-    <nav class="navbar navbar-default navbar-static-top" style="background: #6E7FA4">
+<nav class="navbar navbar-default navbar-static-top" style="background: #6E7FA4">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <p class="navbar-text" id="doc_time" style="color: black">
+                <script type="text/javascript">
+                    function clock() {
+                        var d = new Date();
+                        var data = d.toDateString();
+                        var time = d.toLocaleTimeString();
+                        date_time = data + " " + time; /*" " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();*/
+                     document.getElementById("doc_time").innerHTML = date_time;
+                        setTimeout("clock()", 1000);
+                    }
+                    clock();
+                </script>
+            </p>
             <c:if test="${empty user}">
                 <form action="../jsp/user_login.jsp" class="navbar-form navbar-right">
                     <button type="submit" class="btn btn-default"><fmt:message key="nav.signin"/></button>

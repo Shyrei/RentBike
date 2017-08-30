@@ -6,7 +6,7 @@ package by.shyrei.rentbike.util;
  * author Shyrei Uladzimir
  */
 public class PageConstant {
-    public final static String ERROR_PAGE = "jsp/error_page.jsp";
+    public final static String ERROR_PAGE = "/jsp/error_page.jsp";
     public final static String MAIN_PAGE = "jsp/main_page.jsp";
     public final static String FIRST_PAGE = "index.jsp";
     public final static String REGISTER_PAGE = "jsp/user_register.jsp";
