@@ -13,7 +13,7 @@ public class Router {
     private RouteType route = RouteType.FORWARD;
 
 
-    public String getPagePath() {
+    String getPagePath() {
         return pagePath;
     }
 
@@ -21,7 +21,7 @@ public class Router {
         this.pagePath = pagePath;
     }
 
-    public RouteType getRoute() {
+    RouteType getRoute() {
         return route;
     }
 

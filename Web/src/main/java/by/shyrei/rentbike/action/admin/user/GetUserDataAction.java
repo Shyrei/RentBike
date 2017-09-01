@@ -33,7 +33,7 @@ public class GetUserDataAction implements Action {
         ArrayList<Role> rolesList;
         try {
             usersList = userService.findAll();
-            rolesList = roleService.findAll();
+            rolesList = roleService.findAllToChange();
             request.setAttribute(USERS_LIST, usersList);
             request.setAttribute(ROLES_LIST, rolesList);
             router.setPagePath(PageConstant.UPDATE_USER);

@@ -4,7 +4,6 @@ import by.shyrei.rentbike.dao.RoleDao;
 import by.shyrei.rentbike.entity.Role;
 import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
-
 import java.util.ArrayList;
 
 /**
@@ -18,6 +17,16 @@ public class RoleService {
     public ArrayList<Role> findAll() throws ServiceException {
         try {
             return roleDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in findAll method", e);
+        }
+    }
+
+    public ArrayList<Role> findAllToChange() throws ServiceException {
+        try {
+            ArrayList<Role> rolesList = new ArrayList<>();
+            roleDao.findAll().stream().filter((Role role) ->  role.getId() != 2 & role.getId() != 3).forEach(rolesList::add);
+            return rolesList;
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in findAll method", e);
         }
