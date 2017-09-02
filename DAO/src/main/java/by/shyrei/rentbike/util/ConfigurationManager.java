@@ -30,6 +30,10 @@ public class ConfigurationManager {
         return value;
     }
 
+    /*
+    * Initialize the configuration file
+    *
+    */
     private static ResourceBundle initBundle() {
         ResourceBundle resourceBundle;
         try {

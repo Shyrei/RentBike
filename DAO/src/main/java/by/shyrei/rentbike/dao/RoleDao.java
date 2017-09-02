@@ -23,6 +23,10 @@ public class RoleDao extends AbstractDao<Role> {
     private final static String SQL_CREATE_ROLE = "INSERT INTO roles (Role) VALUES (?);";
     private final static String SQL_FIND_ROLE_BY_ID = "SELECT * FROM roles WHERE id = ?;";
 
+    /*
+    * This method return a list of all roles
+    *
+    */
     @Override
     public ArrayList<Role> findAll() throws DaoException {
         ArrayList<Role> rolesList = new ArrayList<>();
@@ -47,6 +51,10 @@ public class RoleDao extends AbstractDao<Role> {
         return rolesList;
     }
 
+    /*
+    * Return user role
+    *
+    */
     @Override
     public Role findEntityById(Integer id) throws DaoException {
         ProxyConnection connection = null;
@@ -70,6 +78,10 @@ public class RoleDao extends AbstractDao<Role> {
         return role;
     }
 
+    /*
+    * Create new user role
+    *
+    */
     @Override
     public boolean createEntity(Role entity) throws DaoException {
         ProxyConnection connection = null;

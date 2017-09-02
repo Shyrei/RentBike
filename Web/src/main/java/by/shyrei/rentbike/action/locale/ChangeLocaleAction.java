@@ -27,7 +27,6 @@ public class ChangeLocaleAction implements Action {
         Cookie c = new Cookie(LOCALE, locale);
         c.setMaxAge(60 * 60 * 24 * 30);
         response.addCookie(c);
-        //TODO подумать что делать с этим методом - пока тут костыль... когда идем форвардом мы не можем получить реферер страницы... (((
         String referer = request.getHeader("referer");
         if (referer.equals("http://localhost:8080/controller")) {
             router.setPagePath((String) request.getSession().getAttribute(REFERRER));

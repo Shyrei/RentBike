@@ -51,7 +51,7 @@
                     <label for="balanceForm" class="col-sm-3 control-label"><fmt:message key="register.form.balance"/></label>
                     <div class="col-sm-9">
                         <input type="number" step="0.01" min="5" id="balanceForm" name="balance" class="form-control" placeholder="<fmt:message key="register.form.balance.placeholder"/>"
-                               onkeyup="checkData('balance')" max="1000" required pattern="\d{1,4}">
+                               onkeyup="checkData('balance')" max="1000" required pattern="[0-9]{1,4}">
                         <b id="balance" style="color: red; font-size: 10px"><fmt:message key="validation.balance"/></b>
                     </div>
                 </div>

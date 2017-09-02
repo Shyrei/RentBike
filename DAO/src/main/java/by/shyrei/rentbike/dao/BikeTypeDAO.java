@@ -25,6 +25,10 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
     private final static String SQL_CREATE = "INSERT INTO types (Type, Price_per_Hour, Image) VALUES(?,?,?);";
     private final static String SQL_FIND_TYPE_BY_ID = "SELECT * FROM types WHERE id = ?;";
 
+    /*
+    * Return list of all bike types
+    *
+    */
     @Override
     public ArrayList<BikeType> findAll() throws DaoException {
         ArrayList<BikeType> typesList = new ArrayList<>();
@@ -56,6 +60,10 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
         return typesList;
     }
 
+    /*
+    * Return bike type by Id
+    *
+    */
     @Override
     public BikeType findEntityById(Integer id) throws DaoException {
         ProxyConnection connection = null;
@@ -84,6 +92,10 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
         return bikeType;
     }
 
+    /*
+    * Create a new bike type
+    *
+    */
     public void create(BikeType entity, InputStream image) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
@@ -102,6 +114,10 @@ public class BikeTypeDAO extends AbstractDao<BikeType> {
         }
     }
 
+    /*
+    * Changes the rental price
+    *
+    */
     public void updateEntity(BikeType entity) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;

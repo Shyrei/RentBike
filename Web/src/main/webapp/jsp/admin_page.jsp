@@ -50,7 +50,7 @@
                     <td><fmt:message key="table.order.value"/></td>
                 </tr>
                 </thead>
-                <c:forEach items="${ordersList}" varStatus="сounter">
+                <c:forEach items="${ordersList}" varStatus="сounter" end="18">
                     <tr>
                         <td>${ordersList[сounter.count-1].id}</td>
                         <td>${ordersList[сounter.count-1].startRent}</td>

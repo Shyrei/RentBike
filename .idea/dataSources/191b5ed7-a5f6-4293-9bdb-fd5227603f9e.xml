@@ -118,7 +118,7 @@
       <Comment>Коэффициент скидки для пользователя. По умолчанию 1. Может уменьшаться адмнистратором елси пользователь часто берет велосипед в прокат. Ограничено типом Decimal(2,1) до одного дробного значения (0,9 или 0,5).</Comment>
       <DataType>decimal(4,2)|0</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;1.00&apos;</DefaultExpression>
+      <DefaultExpression>&apos;0.00&apos;</DefaultExpression>
     </column>
     <index id="32" parent="11" name="fk_Orders_Bikes1_idx">
       <ColNames>Bikes_Id</ColNames>

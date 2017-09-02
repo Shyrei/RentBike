@@ -4,7 +4,6 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
-import java.util.ArrayList;
 import java.util.Enumeration;
 
 /**
@@ -14,8 +13,13 @@ import java.util.Enumeration;
  */
 @WebListener
 public class HttpSessionAttributeListenerImpl implements HttpSessionAttributeListener {
+
     private final static String INVALIDATE = "invalidate";
 
+    /*
+    * Invalidate session when added special attribute
+    *
+    */
     @Override
     public void attributeAdded(HttpSessionBindingEvent httpSessionBindingEvent) {
         HttpSession session = httpSessionBindingEvent.getSession();

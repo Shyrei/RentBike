@@ -57,5 +57,4 @@ public class ValidateUser {
         }
         return null;
     }
-
 }

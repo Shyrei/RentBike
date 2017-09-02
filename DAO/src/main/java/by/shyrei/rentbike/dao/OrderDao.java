@@ -29,6 +29,10 @@ public class OrderDao extends AbstractDao<Order> {
     private final static String SQL_UPDATE_USER = "UPDATE users SET Balance=?, Roles_Id=2 WHERE Id=?;";
     private final static String SQL_UPDATE_BIKE = "UPDATE bikes SET In_Rent=0 WHERE Id=?;";
 
+    /*
+    * This method return a list of all orders
+    *
+    */
     @Override
     public ArrayList<Order> findAll() throws DaoException {
         ArrayList<Order> ordersList = new ArrayList<>();
@@ -52,6 +56,10 @@ public class OrderDao extends AbstractDao<Order> {
         return ordersList;
     }
 
+    /*
+    * Return user order
+    *
+    */
     @Override
     public Order findEntityById(Integer userId) throws DaoException {
         Order order = new Order();
@@ -79,7 +87,10 @@ public class OrderDao extends AbstractDao<Order> {
         return false;
     }
 
-
+    /*
+    * Return unclosed user order
+    *
+    */
     public Order findUnclosedOrder(Integer userId) throws DaoException {
         Order order = new Order();
         ProxyConnection connection = null;
@@ -104,6 +115,10 @@ public class OrderDao extends AbstractDao<Order> {
         return order;
     }
 
+    /*
+    * A method that returns a list of all user orders
+    *
+    */
     public ArrayList<Order> findAllUserOrders(Integer userId) throws DaoException {
         ArrayList<Order> ordersList = new ArrayList<>();
         Order order;
@@ -127,6 +142,10 @@ public class OrderDao extends AbstractDao<Order> {
         return ordersList;
     }
 
+    /*
+    * A method that returns a list of all unclosed orders
+    *
+    */
     public ArrayList<Order> findUnclosed() throws DaoException {
         ArrayList<Order> ordersList = new ArrayList<>();
         Order order;
@@ -149,6 +168,12 @@ public class OrderDao extends AbstractDao<Order> {
         return ordersList;
     }
 
+    /*
+    * This method close order
+    * Change the bike field inRent = false
+    * Changes the user's field Role = has not rent
+    * In the event of a failure, the transaction rolls back
+    */
     public void closeOrder(User user, BigDecimal value, Bike bike) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
@@ -181,6 +206,10 @@ public class OrderDao extends AbstractDao<Order> {
         }
     }
 
+    /*
+    * An internal method for constructing a order from ResultSet
+    *
+    */
     private Order buildOrder(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         order.setId(resultSet.getInt(1));

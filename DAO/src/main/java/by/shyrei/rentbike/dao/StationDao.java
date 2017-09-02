@@ -22,6 +22,10 @@ public class StationDao extends AbstractDao<Station> {
     private final static String SQL_CREATE_STATION = "INSERT INTO stations (City, Location) VALUES (?, ?);";
     private final static String SQL_FIND_STATION_BY_ID = "SELECT * FROM stations WHERE id = ?;";
 
+    /*
+    * This method return a list of all stations
+    *
+    */
     @Override
     public ArrayList<Station> findAll() throws DaoException {
         ArrayList<Station> stationsList = new ArrayList<>();
@@ -47,6 +51,10 @@ public class StationDao extends AbstractDao<Station> {
         return stationsList;
     }
 
+    /*
+    * This method return station
+    *
+    */
     @Override
     public Station findEntityById(Integer id) throws DaoException {
         ProxyConnection connection = null;
@@ -71,6 +79,10 @@ public class StationDao extends AbstractDao<Station> {
         return station;
     }
 
+    /*
+    * Create new station
+    *
+    */
     @Override
     public boolean createEntity(Station entity) throws DaoException {
         ProxyConnection connection = null;
@@ -92,6 +104,10 @@ public class StationDao extends AbstractDao<Station> {
         return isCreate;
     }
 
+    /*
+    * This method return numbers bikes on concrete station
+    * Use this method to send email if numbers bikes on station < Min
+    */
     public Integer checkNumberBikeOnStation(Integer stationId) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;

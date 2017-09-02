@@ -29,9 +29,8 @@
                     <label for="price" class="col-sm-3 control-label"><fmt:message
                             key="update.type.form.price"/></label>
                     <div class="col-sm-9">
-                        <input type="number" step="0.01" id="price" name="price" class="form-control"
-                               placeholder="<fmt:message key="update.type.form.price.placeholder"/>"
-                               max="10" required pattern="[0-9]{1,2}">
+                        <input type="number" step="0.01" id="price" name="price" class="form-control" placeholder="<fmt:message key="update.type.form.price.placeholder"/>"
+                               min="1" max="10" required pattern="[0-9]{1,2}">
                         <b style="color: darkgray; font-size: 10px"><fmt:message key="validation.type.price"/></b>
                     </div>
                 </div>

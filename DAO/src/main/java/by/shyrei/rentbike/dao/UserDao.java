@@ -26,6 +26,10 @@ public class UserDao extends AbstractDao<User> {
     private final static String SQL_UPDATE_BALANCE = "UPDATE users SET Balance=? WHERE Id=?;";
     private final static String SQL_UPDATE_ROLE = "UPDATE users SET Roles_Id=? WHERE Id=?;";
 
+    /*
+    * This method return a list of all users
+    *
+    */
     @Override
     public ArrayList<User> findAll() throws DaoException {
         ArrayList<User> usersList = new ArrayList<>();
@@ -47,6 +51,10 @@ public class UserDao extends AbstractDao<User> {
         return usersList;
     }
 
+    /*
+    * Search user by Id
+    *
+    */
     @Override
     public User findEntityById(Integer id) throws DaoException {
         User user = null;
@@ -69,6 +77,10 @@ public class UserDao extends AbstractDao<User> {
         return user;
     }
 
+    /*
+    * This method create new User
+    *
+    */
     @Override
     public boolean createEntity(User user) throws DaoException {
         ProxyConnection connection = null;
@@ -93,6 +105,11 @@ public class UserDao extends AbstractDao<User> {
         return isCreate;
     }
 
+    /*
+    * This method search user by login and password
+    * Return user if a user with such a login and password exists
+    *
+    */
     public User findEntityByLoginAndPassword(String login, String password) throws DaoException {
         User user = null;
         ProxyConnection connection = null;
@@ -115,6 +132,12 @@ public class UserDao extends AbstractDao<User> {
         return user;
     }
 
+    /*
+    * This method search user by login
+    * Return true if a user with such a login exists
+    * else return false
+    *
+    */
     public boolean findEntityByLogin(String login) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
@@ -132,6 +155,10 @@ public class UserDao extends AbstractDao<User> {
         }
     }
 
+    /*
+    * This method update user balance
+    *
+    */
     public User updateBalance(User user, BigDecimal newBalance) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
@@ -151,6 +178,10 @@ public class UserDao extends AbstractDao<User> {
         return user;
     }
 
+    /*
+    * This method change user role
+    *
+    */
     public void updateEntity(User user) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
@@ -168,6 +199,10 @@ public class UserDao extends AbstractDao<User> {
         }
     }
 
+    /*
+    * An internal method for constructing a user from ResultSet
+    *
+    */
     private User buildUser(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getInt(1));

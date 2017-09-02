@@ -18,6 +18,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * Project RentBike
  * Created on 13.07.2017.
  * author Shyrei Uladzimir
+ *
+ * This class is used to create a connection pool
+ * The object of this class exists in a single instance
  */
 public class ConnectionPool {
     private final static Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
@@ -26,6 +29,11 @@ public class ConnectionPool {
     private static ConnectionPool instance;
     private BlockingQueue<ProxyConnection> queue;
 
+    /*
+    * Register driver manager
+    * Create connection pool with the required size
+    *
+    */
     private ConnectionPool() {
         String url = ConfigurationManager.getProperty("dburl");
         String user = ConfigurationManager.getProperty("dbuser");
@@ -36,19 +44,19 @@ public class ConnectionPool {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 
-            //первый раз пробуем
+            //Trying for the first time
             for (int i = 0; i < maxConnections; i++) {
                 ProxyConnection connection = new ProxyConnection(DriverManager.getConnection(url, user, password));
                 queue.put(connection);
             }
-            // если не создали макисамльное количество пробуем еще раз
+            // if you did not create the right amount try again
             if (queue.size() < maxConnections) {
                 for (int i = queue.size(); i < maxConnections; i++) {
                     ProxyConnection connection = new ProxyConnection(DriverManager.getConnection(url, user, password));
                     queue.put(connection);
                 }
             }
-            // если меньше допустимого для работы программы
+            // if less than the allowable program throw Exception
             if (queue.size() < maxIdle) {
                 throw new RuntimeException("Error, when create connection pool");
             }
@@ -61,10 +69,10 @@ public class ConnectionPool {
         }
     }
 
-    public int getSize() {
-        return queue.size();
-    }
-
+    /*
+    * Create instance ConnectionPool
+    *
+    */
     public static ConnectionPool getInstance() {
         if (!CREATE_INSTANCE.get()) {
             lock.lock();
@@ -80,6 +88,9 @@ public class ConnectionPool {
         return instance;
     }
 
+    /*
+    * Take connection from ConnectionPool
+    */
     public ProxyConnection getConnection() {
         ProxyConnection connection = null;
         try {
@@ -90,10 +101,18 @@ public class ConnectionPool {
         return connection;
     }
 
+    /*
+    * Return connection to ConnectionPool
+    *
+    */
     void releaseConnection(ProxyConnection connection) {
         queue.add(connection);
     }
 
+    /*
+    * Deregister all driver manager drivers
+    * Close all connection with DB
+    */
     public void closeConnectionPool() {
         for (ProxyConnection connection : queue) {
             try {
@@ -112,5 +131,9 @@ public class ConnectionPool {
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
         }
+    }
+
+    public int getSize() {
+        return queue.size();
     }
 }

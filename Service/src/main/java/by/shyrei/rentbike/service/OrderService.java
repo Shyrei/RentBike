@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * author Shyrei Uladzimir
  */
 public class OrderService {
+    private final static BigDecimal discountValue = new BigDecimal(0.7);
     private OrderDao orderDao = new OrderDao();
     private BikeDao bikeDao = new BikeDao();
 
@@ -38,7 +39,11 @@ public class OrderService {
             BigDecimal minutes = new BigDecimal(ChronoUnit.MINUTES.between(startRent, endRent));
             bike = bikeDao.findEntityById(order.getBikeId());
             BigDecimal pricePerMinutes = bike.getPricePerHour();
-            value = minutes.multiply(pricePerMinutes);
+            if (user.getRoleId() == 1) {
+                value = minutes.multiply(pricePerMinutes).multiply(discountValue);
+            } else {
+                value = minutes.multiply(pricePerMinutes);
+            }
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in calculateOrder method", e);
         }

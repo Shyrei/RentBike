@@ -43,6 +43,10 @@ public class BikeService {
         return bikesList;
     }
 
+    /*
+    * Rent bike and send email if number of bikes < allowable
+    *
+    */
     public Bike rentBike(Integer bikeId, Integer userId) throws ServiceException {
         Bike bike;
         try {

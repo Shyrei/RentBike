@@ -24,6 +24,10 @@ public class BikeDao extends AbstractDao<Bike> {
     private final static String SQL_FIND_ALL_ON_STATION = "SELECT bikes.Id, types.Type, types.Price_Per_Hour, stations.City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent = '0' AND bikes.Is_Available = '1' AND bikes.Stations_Id = ? ORDER BY bikes.Id;";
     private final static String SQL_CHANGE_BIKE_STATUS = "UPDATE bikes SET Is_Available=? WHERE Id=?;";
 
+    /*
+    * A method that returns a list of all bikes in the database
+    *
+    */
     @Override
     public ArrayList<Bike> findAll() throws DaoException {
         ArrayList<Bike> bikesList = new ArrayList<>();
@@ -46,6 +50,10 @@ public class BikeDao extends AbstractDao<Bike> {
         return bikesList;
     }
 
+    /*
+    * The method that searches for a bike on Id
+    *
+    */
     @Override
     public Bike findEntityById(Integer id) throws DaoException {
         Bike bike = null;
@@ -68,6 +76,10 @@ public class BikeDao extends AbstractDao<Bike> {
         return bike;
     }
 
+    /*
+    *Add a new bike to the station
+    *
+    */
     @Override
     public boolean createEntity(Bike entity) throws DaoException {
         ProxyConnection connection = null;
@@ -88,7 +100,11 @@ public class BikeDao extends AbstractDao<Bike> {
         }
         return isCreate;
     }
-
+    /*
+    * A method that returns a list of bikes for page-by-page rendering
+    * @param pageCapacity - number of returned bicycles (Limit in the SQL)
+    * @param pageNumber - number of displayed page
+    */
     public ArrayList<Bike> findAllByPage(int pageCapacity, int pageNumber) throws DaoException {
         ArrayList<Bike> bikesList = new ArrayList<>();
         ProxyConnection connection = null;
@@ -111,7 +127,10 @@ public class BikeDao extends AbstractDao<Bike> {
         }
         return bikesList;
     }
-
+    /*
+    * Return list of bikes on concrete station
+    *
+    */
     public ArrayList<Bike> findAllOnStation(int stationId) throws DaoException {
         ArrayList<Bike> bikesList = new ArrayList<>();
         ProxyConnection connection = null;
@@ -133,7 +152,13 @@ public class BikeDao extends AbstractDao<Bike> {
         }
         return bikesList;
     }
-
+    /*
+    * The method that rents a bike
+    * Change the bike field inRent = True
+    * Changes the user's field Role = hasRent
+    * Creates a new record in the table orders
+    * In the event of a failure, the transaction rolls back
+    */
     public Bike rentBike(Integer bikeId, Integer userId) throws DaoException {
         Bike bike = null;
         ProxyConnection connection = null;
@@ -174,6 +199,10 @@ public class BikeDao extends AbstractDao<Bike> {
         return bike;
     }
 
+    /*
+    * Change the bike field isAvailable = False
+    *
+    */
     public void changeEntity(Bike bike) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
@@ -191,6 +220,10 @@ public class BikeDao extends AbstractDao<Bike> {
         }
     }
 
+    /*
+    * An internal method for constructing a bike from ResultSet
+    *
+    */
     private Bike buildBike(ResultSet resultSet) throws SQLException {
         Bike bike = new Bike();
         bike.setId(resultSet.getInt(1));

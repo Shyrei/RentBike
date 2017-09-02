@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionFactory {
 
+    /*
+    * Create and return the necessary action
+    *
+    */
     public static Action getAction(HttpServletRequest request){
         ActionType entry = ActionType.valueOf(request.getParameter("action").toUpperCase());
         return entry.getAction();

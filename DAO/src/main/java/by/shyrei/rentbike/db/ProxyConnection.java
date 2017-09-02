@@ -9,6 +9,10 @@ import java.util.concurrent.Executor;
  * Project RentBike
  * Created on 13.07.2017.
  * author Shyrei Uladzimir
+ *
+ * Uses the proxy pattern
+ * Protects our connection pool from unauthorized access to other connections
+ *
  */
 public class ProxyConnection implements Connection {
     private Connection connection;
@@ -17,6 +21,10 @@ public class ProxyConnection implements Connection {
         this.connection = connection;
     }
 
+    /*
+    * Do not close the connection, but return it to the pool
+    * To close a connection, use the connectionClose() method
+    */
     @Override
     public void close() throws SQLException {
         ConnectionPool.getInstance().releaseConnection(this);
