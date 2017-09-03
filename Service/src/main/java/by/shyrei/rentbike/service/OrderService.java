@@ -94,4 +94,13 @@ public class OrderService {
             throw new ServiceException("Transaction failed in findUnclosed method", e);
         }
     }
+
+    public ArrayList<Order> findAllByPage(int pageCapacity, int pageNumber) throws ServiceException {
+        ArrayList<Order> ordersList;
+        try {
+            return orderDao.findAllByPage(pageCapacity, pageNumber);
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in findUnclosed method", e);
+        }
+    }
 }

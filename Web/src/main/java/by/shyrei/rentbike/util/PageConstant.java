@@ -23,6 +23,7 @@ public class PageConstant {
     public final static String ALL_TYPES = "includeAdmin/type_show_all.jsp";
     public final static String ALL_ROLES = "includeAdmin/role_show_all.jsp";
     public final static String ALL_ORDERS = "includeAdmin/order_show_all.jsp";
+    public final static String ALL_ORDERS_PAGE = "includeAdmin/order_show_all_by_page.jsp";
     public final static String ALL_STATIONS = "includeAdmin/station_show_all.jsp";
 
     public final static String UPDATE_USER = "includeAdmin/user_change.jsp";

@@ -52,7 +52,7 @@
                         key="nav.order"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/controller?action=show_all_orders"><fmt:message key="nav.order.show.all"/></a>
+                    <li><a href="/controller?action=show_orders_page"><fmt:message key="nav.order.show.all"/></a>
                     <li><a href="/controller?action=show_unclosed_orders"><fmt:message key="nav.order.unclosed.orders"/></a>
                     <li class="divider"></li>
                     <li><a href="#"><fmt:message key="search.form.order"/></a>

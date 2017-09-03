@@ -8,9 +8,7 @@ import by.shyrei.rentbike.entity.User;
 import by.shyrei.rentbike.exception.DaoException;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +20,7 @@ public class OrderDao extends AbstractDao<Order> {
 
     private final static String SQL_FIND_ORDER = "SELECT * FROM orders WHERE Users_Id=? ORDER BY id DESC LIMIT 1;";
     private final static String SQL_FIND_ALL_ORDERS = "SELECT * FROM orders;";
+    private final static String SQL_FIND_ALL_ORDERS_BY_PAGE = "SELECT * FROM orders ORDER BY orders.Id LIMIT ? OFFSET ?;";
     private final static String SQL_FIND_UNCLOSED_ORDERS = "SELECT * FROM orders WHERE End_Date IS NULL;";
     private final static String SQL_FIND_UNCLOSED_USER_ORDER = "SELECT * FROM orders WHERE Users_Id=? AND End_Date IS NULL;";
     private final static String SQL_FIND_ALL_USER_ORDERS = "SELECT * FROM orders WHERE Users_Id=?;";
@@ -182,6 +181,10 @@ public class OrderDao extends AbstractDao<Order> {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
+            DatabaseMetaData metaData = connection.getMetaData();
+            if (metaData.supportsTransactionIsolationLevel(Connection.TRANSACTION_SERIALIZABLE)) {
+                connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            }
             preparedStatement = connection.prepareStatement(SQL_CLOSE_ORDER);
             preparedStatement.setBigDecimal(1, value);
             preparedStatement.setInt(2, user.getId());
@@ -199,6 +202,7 @@ public class OrderDao extends AbstractDao<Order> {
             preparedStatement.executeUpdate();
             connection.commit();
             connection.setAutoCommit(true);
+            connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -210,6 +214,34 @@ public class OrderDao extends AbstractDao<Order> {
             close(preparedStatement);
             close(connection);
         }
+    }
+    /*
+    * A method that returns a list of orders for page-by-page rendering
+    * @param pageCapacity - number of returned bicycles (Limit in the SQL)
+    * @param pageNumber - number of displayed page (Offset in the SQL)
+    *
+    */
+    public ArrayList<Order> findAllByPage(int pageCapacity, int pageNumber) throws DaoException {
+        ArrayList<Order> ordersList = new ArrayList<>();
+        ProxyConnection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL_FIND_ALL_ORDERS_BY_PAGE);
+            preparedStatement.setInt(1, pageCapacity);
+            preparedStatement.setInt(2, (pageNumber * pageCapacity - pageCapacity));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Order order = buildOrder(resultSet);
+                ordersList.add(order);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Error in findAllByPage method", e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return ordersList;
     }
 
     /*
@@ -229,4 +261,6 @@ public class OrderDao extends AbstractDao<Order> {
         order.setBikeId(resultSet.getInt(7));
         return order;
     }
+
+
 }

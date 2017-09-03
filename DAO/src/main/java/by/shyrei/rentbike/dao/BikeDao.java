@@ -7,6 +7,10 @@ import by.shyrei.rentbike.entity.User;
 import by.shyrei.rentbike.exception.DaoException;
 
 import java.sql.*;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.util.*;
 
 /**
@@ -25,6 +29,7 @@ public class BikeDao extends AbstractDao<Bike> {
     private final static String SQL_CREATE_BIKE = "INSERT INTO bikes (Types_Id, Stations_Id) VALUES (?, ?);";
     private final static String SQL_FIND_ALL_ON_STATION = "SELECT bikes.Id, types.Type, types.Price_Per_Hour, stations.City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent = '0' AND bikes.Is_Available = '1' AND bikes.Stations_Id = ? ORDER BY bikes.Id;";
     private final static String SQL_CHANGE_BIKE_STATUS = "UPDATE bikes SET Is_Available=? WHERE Id=?;";
+    private final static double DISCOUNT = 0.7;
 
     /*
     * A method that returns a list of all bikes in the database
@@ -102,6 +107,7 @@ public class BikeDao extends AbstractDao<Bike> {
         }
         return isCreate;
     }
+
     /*
     * A method that returns a list of bikes for page-by-page rendering
     * @param pageCapacity - number of returned bicycles (Limit in the SQL)
@@ -129,6 +135,7 @@ public class BikeDao extends AbstractDao<Bike> {
         }
         return bikesList;
     }
+
     /*
     * Return list of bikes on concrete station
     *
@@ -154,6 +161,7 @@ public class BikeDao extends AbstractDao<Bike> {
         }
         return bikesList;
     }
+
     /*
     * The method that rents a bike
     * Change the bike field inRent = True
@@ -168,6 +176,10 @@ public class BikeDao extends AbstractDao<Bike> {
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
+            DatabaseMetaData metaData = connection.getMetaData();
+            if (metaData.supportsTransactionIsolationLevel(Connection.TRANSACTION_SERIALIZABLE)) {
+                connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            }
             preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID);
             preparedStatement.setInt(1, bikeId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -179,7 +191,7 @@ public class BikeDao extends AbstractDao<Bike> {
                 preparedStatement.executeUpdate();
                 if (user.getRoleId() == 1) {
                     preparedStatement = connection.prepareStatement(SQL_ADD_ORDER_WITH_DISCOUNT);
-                    preparedStatement.setDouble(3, 0.7);
+                    preparedStatement.setDouble(3, DISCOUNT);
                 } else {
                     preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
                 }
@@ -191,6 +203,7 @@ public class BikeDao extends AbstractDao<Bike> {
                 preparedStatement.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
+                connection.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             }
         } catch (SQLException e) {
             try {

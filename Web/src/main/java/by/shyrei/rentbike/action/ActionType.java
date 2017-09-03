@@ -3,6 +3,7 @@ package by.shyrei.rentbike.action;
 import by.shyrei.rentbike.action.admin.*;
 import by.shyrei.rentbike.action.admin.bike.*;
 import by.shyrei.rentbike.action.admin.order.ShowAllOrdersAction;
+import by.shyrei.rentbike.action.admin.order.ShowAllOrdersByPageAction;
 import by.shyrei.rentbike.action.admin.order.ShowUnclosedOrdersAction;
 import by.shyrei.rentbike.action.admin.order.ShowUserOrdersAction;
 import by.shyrei.rentbike.action.admin.station.AddStationAction;
@@ -47,6 +48,7 @@ public enum ActionType {
     SHOW_UNCLOSED_ORDERS (new ShowUnclosedOrdersAction()),
     SHOW_ADMIN_PAGE(new ShowAdminPageAction()),
     SHOW_BIKES_PAGE (new ShowAllBikesByPageAction()),
+    SHOW_ORDERS_PAGE (new ShowAllOrdersByPageAction()),
     SELECT_BIKE (new SelectBikeAction()),
     SHOW_BIKES_ON_STATION(new ShowBikesOnStationAction()),
 
