@@ -19,7 +19,6 @@ import java.util.ArrayList;
  * author Shyrei Uladzimir
  */
 public class OrderService {
-    private final static BigDecimal discountValue = new BigDecimal(0.7);
     private OrderDao orderDao = new OrderDao();
     private BikeDao bikeDao = new BikeDao();
 
@@ -39,11 +38,7 @@ public class OrderService {
             BigDecimal minutes = new BigDecimal(ChronoUnit.MINUTES.between(startRent, endRent));
             bike = bikeDao.findEntityById(order.getBikeId());
             BigDecimal pricePerMinutes = bike.getPricePerHour();
-            if (user.getRoleId() == 1) {
-                value = minutes.multiply(pricePerMinutes).multiply(discountValue);
-            } else {
-                value = minutes.multiply(pricePerMinutes);
-            }
+            value = minutes.multiply(pricePerMinutes);
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in calculateOrder method", e);
         }
@@ -60,8 +55,9 @@ public class OrderService {
             BigDecimal minutes = new BigDecimal(ChronoUnit.MINUTES.between(startRent, endRent));
             bike = bikeDao.findEntityById(order.getBikeId());
             BigDecimal pricePerMinutes = bike.getPricePerHour();
-            BigDecimal value = minutes.multiply(pricePerMinutes);
-            orderDao.closeOrder(user, value, bike);
+            BigDecimal discount = order.getDiscount();
+            BigDecimal value = minutes.multiply(pricePerMinutes).multiply(discount);
+            orderDao.closeOrder(user, value, bike, order);
         } catch (DaoException e) {
             throw new ServiceException("Transaction failed in closeOrder method", e);
         }

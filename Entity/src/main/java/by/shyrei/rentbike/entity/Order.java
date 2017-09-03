@@ -16,6 +16,7 @@ public class Order extends Entity {
     private LocalDateTime startRent;
     private LocalDateTime endRent;
     private BigDecimal value;
+    private BigDecimal discount;
 
     public int getId() {
         return id;
@@ -65,6 +66,14 @@ public class Order extends Entity {
         this.value = value;
     }
 
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,23 +84,12 @@ public class Order extends Entity {
                 getUserId() == order.getUserId() &&
                 Objects.equals(getStartRent(), order.getStartRent()) &&
                 Objects.equals(getEndRent(), order.getEndRent()) &&
-                Objects.equals(getValue(), order.getValue());
+                Objects.equals(getValue(), order.getValue()) &&
+                Objects.equals(getDiscount(), order.getDiscount());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getBikeId(), getUserId(), getStartRent(), getEndRent(), getValue());
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", bikeId=" + bikeId +
-                ", userId=" + userId +
-                ", startRent=" + startRent +
-                ", endRent=" + endRent +
-                ", value=" + value +
-                "} " + super.toString();
+        return Objects.hash(getId(), getBikeId(), getUserId(), getStartRent(), getEndRent(), getValue(), getDiscount());
     }
 }

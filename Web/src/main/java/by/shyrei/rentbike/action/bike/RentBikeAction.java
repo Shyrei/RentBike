@@ -33,7 +33,8 @@ public class RentBikeAction implements Action {
         try {
             User user = (User) request.getSession().getAttribute(USER);
             if (user != null && user.getBalance().intValue() > 0){
-                Bike bike = bikeService.rentBike(Integer.parseInt(request.getParameter(BIKE_ID)), user.getId());
+                Bike bike = bikeService.rentBike(Integer.parseInt(request.getParameter(BIKE_ID)), user);
+                //Bike bike = bikeService.rentBike(Integer.parseInt(request.getParameter(BIKE_ID)), user.getId());
                 request.getSession().setAttribute(BIKE, bike);
                 User updateUser = userService.findUserById(user.getId());
                 request.getSession().setAttribute(USER, updateUser);

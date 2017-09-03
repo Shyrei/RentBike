@@ -32,7 +32,7 @@ public class GetUserDataAction implements Action {
         ArrayList<User> usersList;
         ArrayList<Role> rolesList;
         try {
-            usersList = userService.findAll();
+            usersList = userService.findAllToChange();
             rolesList = roleService.findAllToChange();
             request.setAttribute(USERS_LIST, usersList);
             request.setAttribute(ROLES_LIST, rolesList);

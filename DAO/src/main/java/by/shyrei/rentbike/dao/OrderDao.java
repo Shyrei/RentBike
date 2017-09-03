@@ -27,6 +27,7 @@ public class OrderDao extends AbstractDao<Order> {
     private final static String SQL_FIND_ALL_USER_ORDERS = "SELECT * FROM orders WHERE Users_Id=?;";
     private final static String SQL_CLOSE_ORDER = "UPDATE orders SET End_Date=now(), Value=? WHERE Users_Id=? AND End_Date IS NULL;";
     private final static String SQL_UPDATE_USER = "UPDATE users SET Balance=?, Roles_Id=2 WHERE Id=?;";
+    private final static String SQL_UPDATE_VIP_USER = "UPDATE users SET Balance=?, Roles_Id=1 WHERE Id=?;";
     private final static String SQL_UPDATE_BIKE = "UPDATE bikes SET In_Rent=0 WHERE Id=?;";
 
     /*
@@ -103,8 +104,9 @@ public class OrderDao extends AbstractDao<Order> {
             while (resultSet.next()) {
                 order.setId(resultSet.getInt(1));
                 order.setStartRent(resultSet.getTimestamp(2).toLocalDateTime());
-                order.setUserId(resultSet.getInt(5));
-                order.setBikeId(resultSet.getInt(6));
+                order.setDiscount(resultSet.getBigDecimal(5));
+                order.setUserId(resultSet.getInt(6));
+                order.setBikeId(resultSet.getInt(7));
             }
         } catch (SQLException e) {
             throw new DaoException("Error in findUnclosedOrder method", e);
@@ -174,7 +176,7 @@ public class OrderDao extends AbstractDao<Order> {
     * Changes the user's field Role = has not rent
     * In the event of a failure, the transaction rolls back
     */
-    public void closeOrder(User user, BigDecimal value, Bike bike) throws DaoException {
+    public void closeOrder(User user, BigDecimal value, Bike bike, Order order) throws DaoException {
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -184,7 +186,11 @@ public class OrderDao extends AbstractDao<Order> {
             preparedStatement.setBigDecimal(1, value);
             preparedStatement.setInt(2, user.getId());
             preparedStatement.executeUpdate();
-            preparedStatement = connection.prepareStatement(SQL_UPDATE_USER);
+            if(order.getDiscount().intValue() == 1) {
+                preparedStatement = connection.prepareStatement(SQL_UPDATE_USER);
+            } else {
+                preparedStatement = connection.prepareStatement(SQL_UPDATE_VIP_USER);
+            }
             preparedStatement.setBigDecimal(1, user.getBalance().subtract(value));
             preparedStatement.setInt(2, user.getId());
             preparedStatement.executeUpdate();
@@ -218,8 +224,9 @@ public class OrderDao extends AbstractDao<Order> {
             order.setEndRent(resultSet.getTimestamp(3).toLocalDateTime());
         }
         order.setValue(resultSet.getBigDecimal(4));
-        order.setUserId(resultSet.getInt(5));
-        order.setBikeId(resultSet.getInt(6));
+        order.setDiscount(resultSet.getBigDecimal(5));
+        order.setUserId(resultSet.getInt(6));
+        order.setBikeId(resultSet.getInt(7));
         return order;
     }
 }

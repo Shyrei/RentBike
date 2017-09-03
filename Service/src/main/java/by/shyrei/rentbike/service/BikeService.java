@@ -3,6 +3,7 @@ package by.shyrei.rentbike.service;
 import by.shyrei.rentbike.dao.BikeDao;
 import by.shyrei.rentbike.dao.StationDao;
 import by.shyrei.rentbike.entity.Bike;
+import by.shyrei.rentbike.entity.User;
 import by.shyrei.rentbike.exception.DaoException;
 import by.shyrei.rentbike.exception.ServiceException;
 import by.shyrei.rentbike.util.EmailManager;
@@ -47,10 +48,10 @@ public class BikeService {
     * Rent bike and send email if number of bikes < allowable
     *
     */
-    public Bike rentBike(Integer bikeId, Integer userId) throws ServiceException {
+    public Bike rentBike(Integer bikeId, User user) throws ServiceException {
         Bike bike;
         try {
-            bike = bikeDao.rentBike(bikeId, userId);
+            bike = bikeDao.rentBike(bikeId, user);
             Integer stationId = bike.getStationId();
             if (checkNumberOfBikes(stationId)) {
                 MailSender.send(MAIL_SUBJECT, MAIL_TEXT, MAIL_TO);
@@ -86,7 +87,7 @@ public class BikeService {
     }
 
     public void changeBike(int bikeId) throws ServiceException {
-        Bike bike = null;
+        Bike bike;
         try {
             bike = bikeDao.findEntityById(bikeId);
             if (bike.isAvailable()) {

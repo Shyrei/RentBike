@@ -61,6 +61,16 @@ public class UserService {
         }
     }
 
+    public ArrayList<User> findAllToChange() throws ServiceException {
+        try {
+            ArrayList<User> usersList = new ArrayList<>();
+            userDao.findAll().stream().filter((User user) -> user.getRoleId() !=3).forEach(usersList::add);
+            return usersList;
+        } catch (DaoException e) {
+            throw new ServiceException("Transaction failed in findAll method", e);
+        }
+    }
+
     public void updateUser(User user) throws ServiceException {
         try {
             userDao.updateEntity(user);

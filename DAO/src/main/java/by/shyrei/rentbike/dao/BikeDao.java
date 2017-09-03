@@ -3,6 +3,7 @@ package by.shyrei.rentbike.dao;
 import by.shyrei.rentbike.db.ConnectionPool;
 import by.shyrei.rentbike.db.ProxyConnection;
 import by.shyrei.rentbike.entity.Bike;
+import by.shyrei.rentbike.entity.User;
 import by.shyrei.rentbike.exception.DaoException;
 
 import java.sql.*;
@@ -19,6 +20,7 @@ public class BikeDao extends AbstractDao<Bike> {
     private final static String SQL_FIND_BY_ID = "SELECT bikes.Id , types.Type, types.Price_Per_Hour, stations.City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes, types, stations WHERE bikes.Id = ? AND  bikes.Stations_Id = stations.Id AND bikes.Types_Id = types.Id;";
     private final static String SQL_RENT_TRUE = "UPDATE bikes SET In_Rent = '1' WHERE id = ?;";
     private final static String SQL_ADD_ORDER = "INSERT INTO orders (Start_Date, Users_Id, Bikes_Id) VALUES (now(), ?, ?);";
+    private final static String SQL_ADD_ORDER_WITH_DISCOUNT = "INSERT INTO orders (Start_Date, Users_Id, Bikes_Id, Discount) VALUES (now(), ?, ?, ?);";
     private final static String SQL_SET_USER_ROLE_HAS_ORDER = "UPDATE users SET Roles_Id=3 WHERE Id=?;";
     private final static String SQL_CREATE_BIKE = "INSERT INTO bikes (Types_Id, Stations_Id) VALUES (?, ?);";
     private final static String SQL_FIND_ALL_ON_STATION = "SELECT bikes.Id, types.Type, types.Price_Per_Hour, stations.City, stations.Location, types.Image, bikes.Stations_Id, bikes.Is_Available, bikes.In_Rent FROM bikes JOIN types ON bikes.Types_Id = types.Id JOIN stations ON bikes.Stations_Id = stations.Id WHERE bikes.In_Rent = '0' AND bikes.Is_Available = '1' AND bikes.Stations_Id = ? ORDER BY bikes.Id;";
@@ -159,7 +161,7 @@ public class BikeDao extends AbstractDao<Bike> {
     * Creates a new record in the table orders
     * In the event of a failure, the transaction rolls back
     */
-    public Bike rentBike(Integer bikeId, Integer userId) throws DaoException {
+    public Bike rentBike(Integer bikeId, User user) throws DaoException {
         Bike bike = null;
         ProxyConnection connection = null;
         PreparedStatement preparedStatement = null;
@@ -175,12 +177,17 @@ public class BikeDao extends AbstractDao<Bike> {
                 preparedStatement = connection.prepareStatement(SQL_RENT_TRUE);
                 preparedStatement.setInt(1, bike.getId());
                 preparedStatement.executeUpdate();
-                preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
-                preparedStatement.setInt(1, userId);
+                if (user.getRoleId() == 1) {
+                    preparedStatement = connection.prepareStatement(SQL_ADD_ORDER_WITH_DISCOUNT);
+                    preparedStatement.setDouble(3, 0.7);
+                } else {
+                    preparedStatement = connection.prepareStatement(SQL_ADD_ORDER);
+                }
+                preparedStatement.setInt(1, user.getId());
                 preparedStatement.setInt(2, bike.getId());
                 preparedStatement.executeUpdate();
                 preparedStatement = connection.prepareStatement(SQL_SET_USER_ROLE_HAS_ORDER);
-                preparedStatement.setInt(1, userId);
+                preparedStatement.setInt(1, user.getId());
                 preparedStatement.executeUpdate();
                 connection.commit();
                 connection.setAutoCommit(true);
