@@ -29,7 +29,6 @@ public class AjaxController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Bike> bikesList = new ArrayList<>();
         response.setContentType("text/plain");
-        //response.setCharacterEncoding("UTF-8");
         int stationId = Integer.parseInt(request.getParameter(STATION));
         try {
             bikesList = bikeService.findAllOnStation(stationId);
