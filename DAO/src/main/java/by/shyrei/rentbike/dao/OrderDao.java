@@ -82,6 +82,10 @@ public class OrderDao extends AbstractDao<Order> {
         return order;
     }
 
+    /*
+    * This method is implemented in the class: by.shyrei.rentbike.dao.BikeDao
+    * See the method: public Bike rentBike(Integer bikeId, User user) throws DaoException
+    */
     @Override
     public boolean createEntity(Order entity) throws DaoException {
         return false;
