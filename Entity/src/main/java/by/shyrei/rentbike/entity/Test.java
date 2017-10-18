@@ -7,4 +7,5 @@ package by.shyrei.rentbike.entity;
  */
 public class Test {
     String test;
+    String autoJenkins;
 }
