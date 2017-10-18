@@ -49,13 +49,13 @@ public class ConnectionPool {
                 ProxyConnection connection = new ProxyConnection(DriverManager.getConnection(url, user, password));
                 queue.put(connection);
             }
-            // if you did not create the right amount try again
-            if (queue.size() < maxConnections) {
+            // this block will never be executed
+            /*if (queue.size() < maxConnections) {
                 for (int i = queue.size(); i < maxConnections; i++) {
                     ProxyConnection connection = new ProxyConnection(DriverManager.getConnection(url, user, password));
                     queue.put(connection);
                 }
-            }
+            }*/
             // if less than the allowable program throw Exception
             if (queue.size() < maxIdle) {
                 throw new RuntimeException("Error, when create connection pool");

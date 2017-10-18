@@ -33,13 +33,15 @@ public class RegisterUserAction implements Action {
     @Override
     public Router execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Router router = new Router();
-        User user = new User();
+        HttpSession session = request.getSession();
+        /*User user = new User();
         HttpSession session = request.getSession();
         user.setFirstName(request.getParameter(FIRST_NAME));
         user.setLastName(request.getParameter(LAST_NAME));
         user.setLogin(request.getParameter(LOGIN));
         user.setPassword(request.getParameter(PASSWORD));
-        user.setBalance(new BigDecimal(request.getParameter(BALANCE)));
+        user.setBalance(new BigDecimal(request.getParameter(BALANCE)));*/
+        User user = getUserDataFromRequest(request);
         try {
             if (userService.validateUser(user) != null){
                 request.setAttribute(WRONG_REGISTER_DATA, userService.validateUser(user));
@@ -61,5 +63,15 @@ public class RegisterUserAction implements Action {
             router.setRoute(Router.RouteType.REDIRECT);
         }
         return router;
+    }
+
+    private User getUserDataFromRequest(HttpServletRequest request) {
+        User user = new User();
+        user.setFirstName(request.getParameter(FIRST_NAME));
+        user.setLastName(request.getParameter(LAST_NAME));
+        user.setLogin(request.getParameter(LOGIN));
+        user.setPassword(request.getParameter(PASSWORD));
+        user.setBalance(new BigDecimal(request.getParameter(BALANCE)));
+        return user;
     }
 }
