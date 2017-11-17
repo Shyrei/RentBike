@@ -7,11 +7,11 @@
 <html>
 <head>
     <title><fmt:message key="title.main.page"/></title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet" type="text/css" >
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
-<%@ include file="../include/navbar.jsp" %>
+<%@ include file="/include/navbar.jsp" %>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-6">
     <table class="MyTableMain">
@@ -36,7 +36,7 @@
                     <%--users role: 1 - vip_user; 2 - user; 3 - user_has_order; 4 - blocked user; 5 - administrator--%>
                 <c:if test="${not empty user and user.roleId <= 2}">
                     <td>
-                        <form action="/controller" method="post">
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
                             <input type="hidden" name="action" value="rent_bike">
                             <input type="hidden" name="bikeId" value="${bikesList[сounter.count-1].id}">
                             <button type="submit" class="btn btn-link">${bikesList[сounter.count-1].id} <fmt:message key="rent"/></button>
@@ -59,7 +59,7 @@
     </nav>
     </div>
 </div>
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="/include/footer.jsp" %>
 </body>
 </html>
 

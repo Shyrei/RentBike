@@ -8,5 +8,8 @@ package by.shyrei.rentbike.entity;
 public class Test {
     String test;
     int age;
-    
+    int fff;
+    String bbb;
+
+
 }

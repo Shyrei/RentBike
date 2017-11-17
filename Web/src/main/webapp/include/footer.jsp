@@ -16,5 +16,5 @@
         </form>
     </div>
 </nav>
-<script src="../js/jquery-3.2.0.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.2.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

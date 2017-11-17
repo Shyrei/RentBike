@@ -2,3 +2,4 @@
 {16-08-2017 13:41:01} {main} {ERROR} {shyrei.rentbike.util.MailSender} {line 46} {Could not send emailIllegal whitespace in address} 
 {16-08-2017 13:41:36} {main} {ERROR} {shyrei.rentbike.util.MailSender} {line 46} {Could not send emailIllegal whitespace in address} 
 {16-08-2017 13:46:54} {main} {ERROR} {shyrei.rentbike.util.MailSender} {line 46} {Could not send emailIllegal whitespace in address} 
+{17-11-2017 20:47:06} {main} {ERROR} {shyrei.rentbike.util.MailSender} {line 41} {Could not send emailUnknown SMTP host: smtp.gmail.com} 

@@ -1,13 +1,13 @@
 <%--@elvariable id="stationsList" type="java.util.ArrayList"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ include file="../include/uselocale.jsp" %>
+<%@ include file="/include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.select.bike" /></title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="../js/jquery-1.6.2.js"></script>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.6.2.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#station').change(function () {
@@ -17,7 +17,7 @@
                 $.ajax({
                         type: 'GET',
                         data: {station: station},
-                        url: '/ajax',
+                        url: '${pageContext.request.contextPath}/ajax',
                         success: function (result) {
                             var bikeList = $.parseJSON(result);
                             var s = '';
@@ -35,10 +35,10 @@
     </script>
 </head>
 <body>
-<%@ include file="../include/navbar.jsp" %>
+<%@ include file="/include/navbar.jsp" %>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-6">
-        <form action="/controller" method="post" class="form-horizontal">
+        <form action="${pageContext.request.contextPath}/controller" method="post" class="form-horizontal">
             <input type="hidden" name="action" value="rent_bike">
             <div class="form-group">
                 <label for="station" class="col-sm-3 col-sm-offset-1 control-label"><fmt:message key="show.bike.form.station"/></label>
@@ -66,7 +66,7 @@
             </form>
     </div>
 </div>
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="/include/footer.jsp" %>
 </body>
 </html>
 

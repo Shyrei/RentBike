@@ -2,15 +2,15 @@
 <%--@elvariable id="emptyOrder" type="java.lang.String"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ include file="../include/uselocale.jsp" %>
+<%@ include file="/include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.user.orders.page"/></title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet" type="text/css" >
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
-<%@ include file="../include/navbar.jsp" %>
+<%@ include file="/include/navbar.jsp" %>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-6">
         <c:if test="${not empty ordersList}">
@@ -40,9 +40,9 @@
                 </h3>
             </div>
         </c:if>
-        <a href="../index.jsp" class="btn btn-default"><fmt:message key="continue"/></a>
+        <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-default"><fmt:message key="continue"/></a>
     </div>
-    <%@ include file="../include/footer.jsp" %>
+    <%@ include file="/include/footer.jsp" %>
 </body>
 </html>
 

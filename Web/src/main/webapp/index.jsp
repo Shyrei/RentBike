@@ -5,6 +5,7 @@
     <title>Index</title>
 </head>
 <body>
+<%--<h2> ebanie puti</h2>--%>
 <c:redirect url="/controller?action=show_bikes_page"/>
 </body>
 </html>

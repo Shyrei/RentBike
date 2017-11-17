@@ -12,11 +12,11 @@
                    style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.user"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/controller?action=show_all_users"><fmt:message key="nav.user.show.all"/></a></li>
-                    <li><a href="/controller?action=get_user_data"><fmt:message key="nav.user.change"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=show_all_users"><fmt:message key="nav.user.show.all"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=get_user_data"><fmt:message key="nav.user.change"/></a></li>
                     <li class="divider"></li>
                     <li><a href="#"><fmt:message key="search.form.user"/></a>
-                        <form action="/controller" method="post" class="form-horizontal">
+                        <form action="${pageContext.request.contextPath}/controller" method="post" class="form-horizontal">
                             <input type="hidden" name="action" value="find_user">
                             <div class="form-group">
                                 <label for="user" class="col-sm-offset-1 col-sm-2 control-label"><fmt:message key="search.form.user.id"/></label>
@@ -40,8 +40,8 @@
                    style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.role"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="../includeAdmin/role_add.jsp"><fmt:message key="nav.role.add"/></a></li>
-                    <li><a href="/controller?action=show_all_roles"><fmt:message key="nav.role.show.all"/></a>
+                    <li><a href="${pageContext.request.contextPath}/includeAdmin/role_add.jsp"><fmt:message key="nav.role.add"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=show_all_roles"><fmt:message key="nav.role.show.all"/></a>
                 </ul>
             </li>
 
@@ -52,11 +52,11 @@
                         key="nav.order"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/controller?action=show_orders_page"><fmt:message key="nav.order.show.all"/></a>
-                    <li><a href="/controller?action=show_unclosed_orders"><fmt:message key="nav.order.unclosed.orders"/></a>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=show_orders_page"><fmt:message key="nav.order.show.all"/></a>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=show_unclosed_orders"><fmt:message key="nav.order.unclosed.orders"/></a>
                     <li class="divider"></li>
                     <li><a href="#"><fmt:message key="search.form.order"/></a>
-                        <form action="/controller" method="post" class="form-horizontal">
+                        <form action="${pageContext.request.contextPath}/controller" method="post" class="form-horizontal">
                             <input type="hidden" name="action" value="show_user_orders">
                             <div class="form-group">
                                 <label for="userForm" class="col-sm-offset-1 col-sm-2 control-label"><fmt:message key="nav.user"/></label>
@@ -84,9 +84,9 @@
                    style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.type"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="../includeAdmin/type_add.jsp"><fmt:message key="nav.type.add"/></a></li>
-                    <li><a href="/controller?action=get_type_data"><fmt:message key="nav.type.edit.price"/></a></li>
-                    <li><a href="/controller?action=show_all_types"><fmt:message key="nav.type.show.all"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/includeAdmin/type_add.jsp"><fmt:message key="nav.type.add"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=get_type_data"><fmt:message key="nav.type.edit.price"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=show_all_types"><fmt:message key="nav.type.show.all"/></a></li>
                 </ul>
             </li>
 
@@ -97,8 +97,8 @@
                         key="nav.station"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/controller?action=show_all_stations"><fmt:message key="nav.station.show.all"/></a></li>
-                    <li><a href="../includeAdmin/station_add.jsp"><fmt:message key="nav.station.add"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=show_all_stations"><fmt:message key="nav.station.show.all"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/includeAdmin/station_add.jsp"><fmt:message key="nav.station.add"/></a></li>
                 </ul>
             </li>
 
@@ -107,11 +107,11 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.bike"/>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/controller?action=get_bike_data"><fmt:message key="nav.bike.add"/></a></li>
-                    <li><a href="/controller?action=show_bikes_on_station"><fmt:message key="nav.bike.show.on.station"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=get_bike_data"><fmt:message key="nav.bike.add"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/controller?action=show_bikes_on_station"><fmt:message key="nav.bike.show.on.station"/></a></li>
                     <li class="divider"></li>
                     <li><a href="#"><fmt:message key="nav.bike.edit"/></a>
-                    <form action="/controller" method="post" class="form-horizontal">
+                    <form action="${pageContext.request.contextPath}/controller" method="post" class="form-horizontal">
                         <input type="hidden" name="action" value="find_bike">
                         <div class="form-group">
                             <label for="bike" class="col-sm-offset-1 col-sm-2 control-label"><fmt:message key="search.form.bike.id"/></label>
@@ -132,11 +132,11 @@
 
         <%--выход/страница админа--%>
         <c:if test="${not empty user and user.roleId == 5}">
-            <form action="/controller" class="navbar-form navbar-right"><fmt:message key="nav.welcome"/><ctg:info user="${user}"/>
+            <form action="${pageContext.request.contextPath}/controller" class="navbar-form navbar-right"><fmt:message key="nav.welcome"/><ctg:info user="${user}"/>
                 <input type="hidden" name="action" value="logout">
                 <button type="submit" class="btn btn-default" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.signout"/></button>
             </form>
-            <form action="/controller" method="post" class="navbar-form navbar-right"><input type="hidden" name="action" value="show_admin_page">
+            <form action="${pageContext.request.contextPath}/controller" method="post" class="navbar-form navbar-right"><input type="hidden" name="action" value="show_admin_page">
                 <button type="submit" class="btn btn-default" style="font-family: Comic Sans MS, cursive, sans-serif; color: #333333"><fmt:message key="nav.admin"/></button>
             </form>
         </c:if>

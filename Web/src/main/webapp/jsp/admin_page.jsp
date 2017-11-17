@@ -4,15 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="../include/uselocale.jsp" %>
+<%@ include file="/include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.admin.page"/></title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet" type="text/css" >
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
-<%@include file="../include/navbar_admin.jsp" %>
+<%@include file="/include/navbar_admin.jsp" %>
 
 <div class="container-fluid">
     <div class="grid">
@@ -86,7 +86,7 @@
         </div>
     </div>
 </div>
-<%@ include file="../include/footer_admin.jsp" %>
+<%@ include file="/include/footer_admin.jsp" %>
 </body>
 </html>
 

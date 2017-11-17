@@ -6,4 +6,6 @@ package by.shyrei.rentbike.entity;
  * author Shyrei Uladzimir
  */
 public class Test2 {
+    String tttt;
+
 }

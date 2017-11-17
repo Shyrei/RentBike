@@ -2,15 +2,15 @@
 <%--@elvariable id="emptyOrder" type="java.lang.String"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ include file="../include/uselocale.jsp" %>
+<%@ include file="/include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.show.all.orders.page"/></title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet" type="text/css" >
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
-<%@ include file="../include/navbar.jsp" %>
+<%@ include file="/include/navbar.jsp" %>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-6">
         <div class="row">
@@ -50,7 +50,7 @@
         </c:if>
     </div>
 </div>
-<%@ include file="../include/footer_admin.jsp" %>
+<%@ include file="/include/footer_admin.jsp" %>
 </body>
 </html>
 

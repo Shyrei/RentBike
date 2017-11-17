@@ -1,13 +1,13 @@
 <%--@elvariable id="stationsList" type="java.util.ArrayList"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ include file="../include/uselocale.jsp" %>
+<%@ include file="/include/uselocale.jsp" %>
 <html>
 <head>
     <title><fmt:message key="title.show.bikes.on.station" /></title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="../js/jquery-1.6.2.js"></script>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.6.2.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#station').change(function () {
@@ -15,7 +15,7 @@
                 $.ajax({
                     type: 'GET',
                     data: {station: station},
-                    url: '/ajax',
+                    url: '${pageContext.request.contextPath}/ajax',
                     success: function (result) {
                         var bikeList = $.parseJSON(result);
                         var s = '';
@@ -31,7 +31,7 @@
     </script>
 </head>
 <body>
-<%@ include file="../include/navbar.jsp" %>
+<%@ include file="/include/navbar.jsp" %>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-6">
 
@@ -49,7 +49,7 @@
         </form>
         <span id="result"></span>
     </div>
-    <%@ include file="../include/footer_admin.jsp" %>
+    <%@ include file="/include/footer_admin.jsp" %>
 </body>
 </html>
 
