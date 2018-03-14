@@ -28,17 +28,15 @@ http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
         </attribute>
     </tag>
     <tag>
-    <name>survey</name>
-    <tag-class>by.shyrei.rentbike.util.GetSurveyCategory</tag-class>
-    <body-content>JSP</body-content>
-     <attribute>
-        <name>surveyCat</name>
-        <required>false</required>
-        <rtexprvalue>true</rtexprvalue>
-    </attribute>
-</tag>
-
-
+        <name>survey</name>
+        <tag-class>by.shyrei.rentbike.util.GetSurveyCategory</tag-class>
+        <body-content>JSP</body-content>
+        <!--   <attribute>
+              <name>surveyCat</name>
+              <required>false</required>
+              <rtexprvalue>true</rtexprvalue>
+          </attribute>-->
+    </tag>
 
 
 </taglib>

@@ -22,13 +22,10 @@ public class GetSurveyCategory extends TagSupport {
 
     private static final long serialVersionUID = 1L;
 
-    private String surveyCat;
 
     @Override
     public int doStartTag() throws JspException {
         try {
-            pageContext.getAttribute("surveyCat22");
-            pageContext.setAttribute("ibal2", surveyCat);
 
             String ourSurveyCat = "xyi";
             pageContext.setAttribute("ibal", ourSurveyCat);
@@ -40,7 +37,5 @@ public class GetSurveyCategory extends TagSupport {
 
     }
 
-    public void setSurveyCat(String surveyCat) {
-        this.surveyCat = surveyCat;
-    }
+
 }
