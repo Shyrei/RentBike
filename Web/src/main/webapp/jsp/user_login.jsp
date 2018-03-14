@@ -36,10 +36,10 @@
                     </div>
                 </div>
                 <c:if test="${not empty wrongLoginPassword}">
-                    <div class="text-center">
-                        <p class="text-danger"><fmt:message key="alert.wrong.login.password"/></p>
-                    </div>
-                </c:if>
+                <div class="text-center">
+                    <p class="text-danger"><fmt:message key="alert.wrong.login.password"/></p>
+                </div>
+            </c:if>
             </form>
         </div>
     </div>

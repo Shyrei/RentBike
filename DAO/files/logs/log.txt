@@ -2,3 +2,15 @@
 {13-07-2017 13:45:11} {main} {FATAL} {shyrei.rentbike.util.ConnectionPool} {line 79} {Unexpected internal error} 
 {13-07-2017 14:11:30} {main} {FATAL} {shyrei.rentbike.util.ConnectionPool} {line 86} {Не возможно подключиться к БД} 
 {13-07-2017 14:13:16} {main} {FATAL} {shyrei.rentbike.util.ConnectionPool} {line 86} {Не возможно подключиться к БД} 
+{17-11-2017 21:16:59} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Could not create connection to database server. Attempted reconnect 3 times. Giving up.} 
+{17-11-2017 21:17:11} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Could not create connection to database server. Attempted reconnect 3 times. Giving up.} 
+{17-11-2017 21:17:27} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Could not create connection to database server. Attempted reconnect 3 times. Giving up.} 
+{17-11-2017 21:19:50} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 21:19:50} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 21:19:50} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 22:49:06} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 22:49:06} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 22:49:06} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 22:50:22} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 22:50:22} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
+{17-11-2017 22:50:22} {main} {FATAL} {shyrei.rentbike.db.ConnectionPool} {line 67} {Access denied for user 'root'@'localhost' (using password: YES)} 
